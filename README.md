@@ -1,54 +1,52 @@
 # claude-skills
 
-A mirror of my account-level Claude skills, so there is somewhere to read them,
-diff them, and eventually manage them.
+מראה של הסקילים שלי ברמת חשבון, כדי שיהיה מקום אחד לקרוא אותם, להשוות ביניהם,
+ובהמשך גם לנהל אותם.
 
-**Private on purpose.** Some of these skills are written about me personally:
-`emotional-sharing` carries examples about medication and mood, `idea-storm`
-names my projects and what went wrong with them. This repository should not
-become public.
+**פרטי בכוונה.** חלק מהסקילים כאן כתובים עליי אישית: ב‑`emotional-sharing` יש
+דוגמאות שנוגעות לתרופות ולמצב רוח, וב‑`idea-storm` מופיעים שמות הפרויקטים שלי
+ומה נכשל בכל אחד. הריפו הזה לא אמור להפוך לציבורי.
 
-## What is here
+## מה יש כאן
 
-| Path | What it holds |
+| נתיב | מה הוא מכיל |
 | --- | --- |
-| `skills/` | One directory per skill, copied verbatim from `~/.claude/skills` |
-| `INDEX.md` | Generated table of every skill and its `description` |
-| `scripts/snapshot-skills.sh` | Refreshes `skills/` from the current session |
-| `scripts/build-index.py` | Regenerates `INDEX.md` |
+| `skills/` | תיקייה לכל סקיל, מועתקת כמו שהיא מ‑`~/.claude/skills` |
+| `INDEX.md` | טבלה שנוצרת אוטומטית, עם כל סקיל והתיאור שלו |
+| `scripts/snapshot-skills.sh` | מרענן את `skills/` מתוך הסשן הנוכחי |
+| `scripts/build-index.py` | מייצר מחדש את `INDEX.md` |
 
-## How the snapshot works
+## איך הצילום עובד
 
-Skills configured on claude.ai are materialised into every Claude Code session's
-container at `~/.claude/skills`. Inside a session they are ordinary files, so
-capturing them needs no API and no app integration, just a copy.
+סקילים שמוגדרים ב‑claude.ai נטענים אוטומטית לקונטיינר של כל סשן Claude Code,
+לתוך `~/.claude/skills`. בתוך הסשן הם קבצים רגילים לגמרי, ולכן כדי לתפוס אותם
+לא צריך API ולא אינטגרציה עם האפליקציה, אלא העתקה פשוטה.
 
 ```text
-claude.ai  ->  (automatic, at session start)  ->  ~/.claude/skills
+claude.ai  ->  (אוטומטית, בפתיחת סשן)         ->  ~/.claude/skills
            ->  (scripts/snapshot-skills.sh)   ->  skills/  ->  git
 ```
 
-To refresh, from a Claude Code session with this repo cloned:
+לרענון, מתוך סשן Claude Code שהריפו הזה משובט בו:
 
 ```bash
 bash scripts/snapshot-skills.sh
 python3 scripts/build-index.py
-git add -A && git commit -m "Refresh skills snapshot" && git push
+git add -A && git commit -m "רענון צילום הסקילים" && git push
 ```
 
-The snapshot mirrors rather than merges, so a skill deleted on claude.ai
-disappears here too and the repo reflects the account as it actually is.
+הצילום עושה mirror ולא merge, כך שסקיל שנמחק ב‑claude.ai נעלם גם כאן, והריפו
+משקף את החשבון כפי שהוא באמת ולא נשאר עם רוחות רפאים.
 
-## The direction that does not exist
+## הכיוון שלא קיים
 
-There is no sync back. Editing a `SKILL.md` here changes nothing about what
-Claude loads; that still requires uploading the skill in the claude.ai account
-settings. This repository is a mirror, not a source of truth, and every workflow
-built on it should assume that.
+אין סנכרון חזרה. עריכה של `SKILL.md` כאן לא משנה כלום במה שקלוד טוען בפועל,
+וזה עדיין דורש העלאה ידנית בהגדרות החשבון ב‑claude.ai. הריפו הזה הוא מראה,
+לא מקור אמת, וכל כלי שייבנה עליו צריך להניח את זה מראש.
 
-## Why the index matters
+## למה האינדקס הוא החלק השימושי
 
-`description` is the only field that decides whether a skill loads at all. With
-28 skills the descriptions start overlapping quietly, and two of them claiming
-the same kind of request will compete with no visible symptom. `INDEX.md` puts
-them side by side so the collisions are readable.
+`description` הוא השדה היחיד שקובע אם סקיל נטען בכלל. עם 28 סקילים התיאורים
+מתחילים לדרוך זה על זה בשקט, ושניים שטוענים לבעלות על אותו סוג בקשה יתחרו בלי
+שום סימפטום גלוי. `INDEX.md` מציב את כולם זה לצד זה, וכך ההתנגשויות נעשות
+קריאות.
