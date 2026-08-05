@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>הסקילים שלי</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* === FLOWLY DESIGN TOKENS === */
+:root {
+  --cream:        #f5f0e6;
+  --cream-soft:   #faf6ec;
+  --paper:        #fbf8f1;
+
+  --ink:          #16211b;
+  --ink-soft:     #2c3a32;
+  --muted:        #6b7a72;
+
+  --forest:       #1f4a35;
+  --forest-deep:  #143024;
+  --forest-light: #2d6b4e;
+  --mustard:      #d4942b;
+  --mustard-soft: #e8b657;
+  --clay:         #c85a3c;
+
+  --border:       #d9d1bf;
+  --border-soft:  #e8e0cd;
+
+  --status-green-bg:  #dcece0;  --status-green-fg:  #1f4a35;
+  --status-yellow-bg: #faecc8;  --status-yellow-fg: #8a6518;
+  --status-red-bg:    #f5d8cf;  --status-red-fg:    #a63b1f;
+
+  --font-display: 'Frank Ruhl Libre', serif;
+  --font-body:    'Heebo', sans-serif;
+
+  --sp-xs: 4px;  --sp-sm: 8px;   --sp-md: 16px;  --sp-lg: 24px;
+  --sp-xl: 32px; --sp-2xl: 48px; --sp-3xl: 80px; --sp-4xl: 100px;
+
+  --r-sm: 10px; --r-md: 14px; --r-lg: 20px; --r-xl: 32px; --r-full: 999px;
+
+  --sh-sm:  0 2px 4px rgba(20, 48, 36, 0.04);
+  --sh-md:  0 8px 24px rgba(20, 48, 36, 0.08);
+  --sh-lg:  0 20px 50px rgba(20, 48, 36, 0.15);
+  --sh-cta: 0 8px 24px rgba(20, 48, 36, 0.25);
+
+  --t-fast: 0.2s ease;
+  --t-base: 0.3s ease;
+}
+
+* { box-sizing: border-box; }
+
+/* The nav is sticky, so anchored scrolls need to clear it or the heading they
+   land on ends up underneath it. */
+html { scroll-padding-top: 84px; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.6;
+  direction: rtl;
+}
+
+/* === GRAIN OVERLAY === */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* === EM HIGHLIGHT (signature) === */
+h1 em, h2 em {
+  font-style: italic;
+  color: var(--forest);
+  position: relative;
+  isolation: isolate;
+}
+h1 em::after, h2 em::after {
+  content: '';
+  position: absolute;
+  bottom: 4px; right: -3px; left: -3px;
+  height: 8px;
+  background: var(--mustard);
+  opacity: 0.35;
+  z-index: -1;
+  border-radius: 3px;
+}
+
+/* === NAV === */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; gap: var(--sp-md);
+  padding: var(--sp-md) var(--sp-xl);
+  background: rgba(245, 240, 230, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-soft);
+}
+.logo-mark {
+  width: 28px; height: 28px;
+  background: var(--forest);
+  border-radius: 50%;
+  position: relative;
+  flex: none;
+}
+.logo-mark::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 2px solid var(--mustard);
+  border-radius: 50%;
+  border-top-color: transparent;
+  border-left-color: transparent;
+}
+nav .brand { font-family: var(--font-display); font-weight: 700; font-size: 20px; }
+nav .spacer { margin-inline-start: auto; }
+
+/* === LAYOUT === */
+.wrap { max-width: 1180px; margin-inline: auto; padding: var(--sp-2xl) var(--sp-xl) var(--sp-3xl); }
+
+.section-tag {
+  display: inline-flex; align-items: center; gap: var(--sp-sm);
+  font-size: 13px; font-weight: 500;
+  letter-spacing: 0.2em;
+  color: var(--forest);
+  text-transform: uppercase;
+}
+.section-tag::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--mustard);
+}
+
+.hero h1 {
+  font-size: clamp(32px, 5vw, 56px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: var(--sp-md) 0 var(--sp-sm);
+}
+.hero p { font-size: 19px; line-height: 1.55; color: var(--ink-soft); max-width: 60ch; margin: 0; }
+
+/* === CONTROLS === */
+.controls {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-sm);
+  margin: var(--sp-2xl) 0 var(--sp-lg);
+}
+.search {
+  flex: 1 1 260px;
+  font-family: var(--font-body); font-size: 16px;
+  padding: 12px 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-full);
+  background: var(--paper);
+  color: var(--ink);
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+.search:focus { outline: none; border-color: var(--forest-light); box-shadow: var(--sh-sm); }
+.search::placeholder { color: var(--muted); }
+
+.chip {
+  font-family: var(--font-body); font-size: 13px; font-weight: 500;
+  padding: 10px 22px;
+  border-radius: var(--r-full);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition: color var(--t-fast), background var(--t-fast), border-color var(--t-fast);
+}
+.chip:hover { background: var(--paper); }
+.chip[aria-pressed="true"] {
+  background: var(--forest-deep);
+  color: var(--cream);
+  border-color: var(--forest-deep);
+}
+.count { font-size: 14px; color: var(--muted); margin-inline-start: auto; }
+
+/* === GRID === */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--sp-lg);
+}
+
+.card {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-lg);
+  padding: var(--sp-xl);
+  display: flex; flex-direction: column; gap: var(--sp-sm);
+  transition: transform var(--t-base), box-shadow var(--t-base), border-color var(--t-base);
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sh-md);
+  border-color: var(--border);
+}
+.card .num {
+  position: absolute;
+  top: 18px; left: 22px;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 1;
+  color: var(--border);
+  pointer-events: none;
+  user-select: none;
+}
+/* The decorative number is pinned to the physical left corner, so its
+   clearance is physical too. A logical padding would follow the title's own
+   direction, which dir="auto" flips per skill, and English titles would run
+   straight into the number. */
+.card h3 {
+  font-size: 26px; line-height: 1.2;
+  color: var(--forest-deep);
+  padding-left: 74px;
+  min-height: 32px;
+}
+.card .slug {
+  font-size: 13px; color: var(--muted);
+  direction: ltr; text-align: start;
+}
+.card .desc {
+  font-size: 15px; line-height: 1.6; color: var(--ink-soft);
+  margin: var(--sp-xs) 0 0;
+  display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.card.open .desc { -webkit-line-clamp: unset; display: block; }
+.card .more {
+  align-self: flex-start;
+  font-family: var(--font-body); font-size: 13px; font-weight: 500;
+  background: none; border: 0; padding: 0;
+  color: var(--forest); cursor: pointer;
+  border-bottom: 1px solid var(--border);
+  transition: color var(--t-fast), border-color var(--t-fast);
+}
+.card .more:hover { color: var(--forest-light); border-color: var(--forest-light); }
+
+.tags { display: flex; flex-wrap: wrap; gap: var(--sp-xs); margin-top: auto; padding-top: var(--sp-md); }
+.tag {
+  font-size: 11px; font-weight: 500;
+  padding: 4px 12px;
+  border-radius: var(--r-full);
+  background: var(--status-green-bg); color: var(--status-green-fg);
+}
+.tag.neutral { background: var(--cream-soft); color: var(--muted); border: 1px solid var(--border-soft); }
+.tag.warn { background: var(--status-yellow-bg); color: var(--status-yellow-fg); }
+
+/* === OVERLAPS === */
+.overlaps { margin-top: var(--sp-3xl); scroll-margin-top: 84px; }
+.overlaps h2 { font-size: clamp(26px, 3.5vw, 38px); line-height: 1.15; margin: var(--sp-md) 0 var(--sp-sm); }
+.overlaps > p { color: var(--ink-soft); max-width: 62ch; margin: 0 0 var(--sp-lg); }
+.pair {
+  background: var(--cream-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-md);
+  padding: var(--sp-md) var(--sp-lg);
+  margin-bottom: var(--sp-sm);
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-sm);
+}
+.pair .names { font-family: var(--font-display); font-weight: 700; font-size: 17px; direction: ltr; }
+.pair.handled { opacity: 0.6; }
+.pair .score {
+  font-size: 11px; font-weight: 500;
+  padding: 4px 12px; border-radius: var(--r-full);
+  background: var(--status-yellow-bg); color: var(--status-yellow-fg);
+}
+.pair .score.ok { background: var(--status-green-bg); color: var(--status-green-fg); }
+.pair .state { font-size: 13px; color: var(--muted); }
+.pair .shared {
+  font-size: 13px; color: var(--muted);
+  direction: ltr; text-align: start;
+  margin-inline-start: auto;
+}
+
+.empty { color: var(--muted); padding: var(--sp-2xl) 0; text-align: center; }
+
+footer { color: var(--muted); font-size: 14px; margin-top: var(--sp-3xl); padding-top: var(--sp-lg); border-top: 1px solid var(--border-soft); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="logo-mark"></span>
+  <span class="brand">הסקילים שלי</span>
+  <span class="spacer"></span>
+  <span class="count" id="navCount">28 סקילים</span>
+</nav>
+
+<div class="wrap">
+
+  <header class="hero">
+    <span class="section-tag">מראה מקומית</span>
+    <h1>כל הסקילים במקום אחד. <em>סוף סוף.</em></h1>
+    <p>
+      צילום של הסקילים ברמת חשבון, ישירות מ־<span dir="ltr">~/.claude/skills</span>.
+      התיאור הוא השדה היחיד שקובע אם סקיל נטען בכלל, ולכן הוא מוצג כאן במלואו.
+    </p>
+  </header>
+
+  <div class="controls">
+    <input class="search" id="q" type="search" placeholder="חיפוש בשם או בתיאור" aria-label="חיפוש סקילים">
+    <button class="chip" id="fFlagged" type="button" aria-pressed="false">רק חופפים</button>
+    <button class="chip" id="fHeb" type="button" aria-pressed="false">עברית</button>
+    <span class="count" id="shown"></span>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <p class="empty" id="empty" hidden>לא נמצא סקיל שמתאים לחיפוש.</p>
+
+  <section class="overlaps">
+    <span class="section-tag">התנגשויות</span>
+    <h2>זוגות שמתחרים על <em>אותה בקשה</em></h2>
+    <p>
+      השוואה בין התיאורים אחרי ניקוי מילות חיבור ומונחים שחוזרים כמעט בכולם.
+      מה שנשאר הוא אוצר המילים המבחין, וחפיפה גבוהה בו אומרת ששני הסקילים
+      יתחרו על אותה פנייה בלי שום סימפטום גלוי.
+    </p>
+    <p>
+      חפיפה לשונית לבדה מטעה, ודווקא כאן זה בולט: שלושת הסקילים שיוצרים סקילים
+      מקבלים ציון אפסי זה מול זה, כי התיאורים שלהם נכתבו כדי להבדיל ולכן נמנעים
+      במכוון מהמילים של השני. לכן כל זוג נושא גם את השאלה אם אחד התיאורים מזכיר
+      את השני בשמו. <strong>זוג שחולק אוצר מילים ולא מפנה לשני הוא זה שדורש
+      החלטה</strong>. זוג שכן מפנה כבר טופל. בכל מקרה זו הערכה גסה, לא הוכחה.
+    </p>
+    <div id="pairs"></div>
+  </section>
+
+  <footer>
+    28 סקילים · 18 זוגות חופפים · נוצר על ידי
+    <span dir="ltr">scripts/build-viewer.py</span>
+  </footer>
+
+</div>
+
+<script>
+const SKILLS = [{"name": "debug-like-expert", "title": "debug-like-expert", "desc": "Deep analysis debugging mode for complex issues. Activates methodical investigation protocol with evidence gathering, hypothesis testing, and rigorous verification. Use when standard troubleshooting fails or when issues require systematic root cause analysis.", "files": 1, "bytes": 11213, "script": "אנגלית", "flagged": false}, {"name": "detailed-responses", "title": "detailed-responses", "desc": "Override Anthropic's brevity guidelines to provide comprehensive, well-formatted responses. ALWAYS use this skill for ALL conversations with Claude Sonnet unless the user explicitly requests to disable it or asks for brief/concise responses. Trigger on ANY query, not just technical ones - this is a default behavior modifier that should be active throughout the entire conversation.", "files": 1, "bytes": 4805, "script": "אנגלית", "flagged": false}, {"name": "doc-coauthoring", "title": "doc-coauthoring", "desc": "Guide users through a structured workflow for co-authoring documentation. Use when user wants to write documentation, proposals, technical specs, decision docs, or similar structured content. This workflow helps users efficiently transfer context, refine content through iteration, and verify the doc works for readers. Trigger when user mentions writing docs, creating proposals, drafting specs, or similar documentation tasks.", "files": 1, "bytes": 15815, "script": "אנגלית", "flagged": true}, {"name": "docx", "title": "docx", "desc": "\"Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files) or Word templates (.dotx files). Triggers include: any mention of 'Word doc', 'word document', '.docx', '.dotx', or requests to produce professional documents with formatting like tables of contents, headings, page numbers, or letterheads. Also use when extracting or reorganizing content from .docx or .dotx files, inserting or replacing images in documents, performing find-and-replace in Word files, working with tracked changes or comments, or converting content into a polished Word document. If the user asks for a 'report', 'memo', 'letter', 'template', or similar deliverable as a Word or .docx file, use this skill. Do NOT use for PDFs, spreadsheets, Google Docs, or general coding tasks unrelated to document generation.\"", "files": 61, "bytes": 6911, "script": "אנגלית", "flagged": true}, {"name": "emotional-sharing", "title": "emotional-sharing", "desc": "תגובה לשיתוף רגשי מתוך עמדה של חבר, לא של מבוגר אחראי. Use this skill whenever the user shares how he feels instead of asking a question — exhaustion, being awake too long, low energy, medication side effects, physical symptoms, burnout, frustration with a project, or a flat mood with no stated cause. Typical phrasings: \"אני מותש\", \"לא ישנתי\", \"אין לי כוח\", \"נמאס לי\", \"אני שחוק\", \"מרגיש אפטי\", \"הכדור עושה לי\", \"לא בא לי כלום\", \"אני כבר המון שעות ער\", \"סתם מרגיש על הפנים\". Trigger it especially when the sharing is embedded mid-task inside a technical conversation and he never asked for anything — that is the case most easily missed. Do NOT use when he asks a direct practical or factual question, even about health or sleep; answer the question. Do NOT use for explanatory documents or guides, which need explanatory-writing instead. This skill overrides detailed-responses — an emotional reply is short, in prose, and never comprehensive.", "files": 1, "bytes": 10429, "script": "מעורב", "flagged": false}, {"name": "explanatory-writing", "title": "explanatory-writing", "desc": "סגנון כתיבה להסברים ומסמכי הדרכה — ישיר, בוגר, בלי hype, נשען על דוגמאות קונקרטיות במקום הפשטות. השתמש בסקיל הזה בכל פעם שאתה כותב מסמך הסבר, מדריך, תיעוד, קורס, או כל תוכן מובנה שנועד ללמד מישהו משהו. השתמש בו גם כשהמשתמש מבקש במפורש \"תסביר בסגנון הזה\", \"תכתוב בסגנון ההסברים שלי\", או מתייחס לסגנון הזה בכל דרך אחרת. אל תחיל אותו על שיחת צ'אט יומיומית קצרה (שאלות עובדה פשוטות, פטפוט, אישורים) אלא אם המשתמש ביקש זאת.", "files": 1, "bytes": 10560, "script": "עברית", "flagged": false}, {"name": "hebrew-documents", "title": "hebrew-documents", "desc": "יצירת מסמכים בעברית עם RTL נכון. השתמש בסקיל זה כאשר יוצרים קובצי DOCX, PDF או PPTX בעברית.", "files": 1, "bytes": 12886, "script": "מעורב", "flagged": false}, {"name": "hebrew-landing-design", "title": "hebrew-landing-design", "desc": "עיצוב דפי נחיתה בעברית ו-RTL שנמנע מהמראה הגנרי — בחירת גופן עברי מנומקת, מבנה שנגזר מרצף ההתנגדויות של הקהל, וניסוח עברי שלא נשמע מתורגם. Use this skill whenever the user asks to design, build, redesign or improve a Hebrew landing page, marketing page, sales page or homepage hero, including phrasings like \"דף נחיתה\", \"עמוד נחיתה\", \"לנדינג פייג\", \"דף מכירה\", \"תבנה לי דף שיווקי\", \"hero בעברית\", or when an existing Hebrew page looks templated and they want it to stop. Read it together with frontend-design, which supplies the general design process and the anti-generic stance; this skill adds the Hebrew, RTL and Israeli-market layer that frontend-design has no notion of. Do NOT use for pages that are primarily in English, where frontend-design alone is enough, and do NOT use for technical documentation or guides, which need tech-guide-design instead.", "files": 4, "bytes": 10123, "script": "מעורב", "flagged": false}, {"name": "hebrew-rtl-best-practices", "title": "hebrew-rtl-best-practices", "desc": "Implement right-to-left (RTL) layouts for Hebrew web applications. Use when user asks about RTL layout, Hebrew text direction, bidirectional (bidi) text, Hebrew CSS, \"right to left\", or needs to build a Hebrew web UI. Covers CSS logical properties, the :dir() pseudo-class, Tailwind RTL, React/Next.js RTL setup, icon mirroring, Hebrew typography, and font selection. Do NOT use for Arabic RTL (similar but different typography) unless user explicitly asks for shared RTL patterns, or for native mobile RTL (React Native I18nManager, SwiftUI, Android) which is out of scope.", "files": 6, "bytes": 16761, "script": "אנגלית", "flagged": false}, {"name": "idea-storm", "title": "idea-storm", "desc": "בריינסטורם רעיונות לכלים ופרויקטים חדשים בסגנון שמדליק את אמיר — הרבה רעיונות קצרים וקונקרטיים מהחיים שלו, בלי הרצאות על פרויקטים פתוחים. Use this skill whenever the user consults about what to build or create next, asks for ideas for a new tool, bot, app or side project — phrasings like \"מה כדאי לי לבנות\", \"בוא נעשה בריינסטורם\", \"תן לי רעיונות\", \"מתלבט מה ליצור\", \"רעיון לפרויקט חדש\", \"מה אפשר לבנות עם\", \"משעמם לי בא לי לבנות משהו\". Trigger it even when the wondering appears mid technical conversation. Do NOT use for marketing or social post ideas, use marketing-content or israeli-social-content instead. Do NOT use for creating or improving skills, use skill-forge. Do NOT use once an idea was already chosen and the work moved to spec or implementation — that is regular development. Mood sharing without a build question belongs to emotional-sharing, not here.", "files": 1, "bytes": 7267, "script": "מעורב", "flagged": false}, {"name": "israeli-content-marketing", "title": "israeli-content-marketing", "desc": "Plan and execute content marketing strategies for the Israeli market including Hebrew SEO content, tech media outreach to Geektime and Calcalist, and B2B content. Use when user asks about Israeli content strategy, Hebrew blog posts, Israeli tech PR, or Hebrew B2B content. Covers Israeli tech media landscape, Hebrew content SEO, and bilingual content strategies.", "files": 5, "bytes": 5304, "script": "אנגלית", "flagged": true}, {"name": "israeli-customer-support-automator", "title": "israeli-customer-support-automator", "desc": "Deploy and configure customer support automation for Israeli businesses. Categorizes Hebrew support tickets, manages complaints per Consumer Protection Law 1981 (14-day returns, cooling-off periods), configures SLA with Israeli hours (Sunday-Thursday), and generates Hebrew canned responses for multi-channel support. Use when user asks to \"set up customer support\", \"automate ticket routing\", \"sherut lakokhot\", \"handle complaints\", or configure helpdesk for Israeli companies. Integrates with Monday.com and Priority ERP. Do NOT use for building chatbots (use hebrew-chatbot-builder), WhatsApp API (use israeli-whatsapp-business), or non-Israeli consumer protection.", "files": 6, "bytes": 23425, "script": "אנגלית", "flagged": false}, {"name": "israeli-privacy-shield", "title": "israeli-privacy-shield", "desc": "Israeli Privacy Protection Law compliance guidance including Amendment 13 (effective August 14, 2025), database registration, consent requirements, data security, cross-border transfers, breach notification, privacy protection officer appointment, and AI governance. Use when user asks about Israeli privacy law, \"haganat pratiut\", \"tikun 13\", data protection in Israel, GDPR compliance for Israeli companies, privacy policy requirements, or database registration. Covers the Privacy Protection Law 1981, Amendment 13, and 2017 Security Regulations. Do NOT use for EU GDPR-only questions without Israeli context.", "files": 5, "bytes": 10822, "script": "אנגלית", "flagged": false}, {"name": "israeli-social-content", "title": "israeli-social-content", "desc": "Create social media content optimized for Israeli audiences across Facebook, Instagram, TikTok, and LinkedIn. Use when user asks about Israeli social media strategy, Hebrew social posts, posting schedules for Israel, Hebrew hashtags, or Israeli Facebook group marketing. Covers platform-specific best practices, Israeli cultural references, and Hebrew copywriting for social. Do NOT use for paid ad campaigns, influencer outreach, or SEO content writing.", "files": 5, "bytes": 8145, "script": "אנגלית", "flagged": true}, {"name": "marketing-content", "title": "marketing-content", "desc": "כתיבת תוכן שיווקי ומדיה חברתית בעברית ובאנגלית. השתמש בסקיל זה תמיד כאשר המשתמש מבקש ליצור או לשפר פוסטים ל-LinkedIn, קפשנים ל-Instagram/Facebook, ניוזלטרים, עמודי מכירה, landing pages, מיילי קמפיין, תוכן לאתר, מודעות, או כל תוכן שיווקי אחר. מתאים גם לשיפור טיוטות קיימות, יצירת וריאציות A/B, וניסוח CTA. גם אם המשתמש לא אמר במפורש \"תוכן שיווקי\" — אם יש כוונה שיווקית, השתמש בסקיל זה.", "files": 3, "bytes": 5623, "script": "עברית", "flagged": false}, {"name": "mcp-builder", "title": "mcp-builder", "desc": "Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).", "files": 10, "bytes": 9092, "script": "אנגלית", "flagged": true}, {"name": "morning", "title": "morning", "desc": "\"Render the user's morning brief as a styled HTML artifact, or set it up as a recurring weekday task. Use only when the user explicitly asks to run, see, or set up their morning brief, or if they invoke /morning by name. A question about their day, schedule, or calendar is not by itself a request for the brief; answer it directly instead.\"", "files": 3, "bytes": 14524, "script": "אנגלית", "flagged": false}, {"name": "pdf", "title": "pdf", "desc": "Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, extracting images, and OCR on scanned PDFs to make them searchable. If the user mentions a .pdf file or asks to produce one, use this skill.", "files": 12, "bytes": 8072, "script": "אנגלית", "flagged": true}, {"name": "pptx", "title": "pptx", "desc": "\"Use this skill any time a .pptx or .potx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from any .pptx or .potx file (even if the extracted content will be used elsewhere, like in an email or summary); editing, modifying, or updating existing presentations; combining or splitting slide files; working with templates (.potx), layouts, speaker notes, or comments. Trigger whenever the user mentions \\\"deck,\\\" \\\"slides,\\\" \\\"presentation,\\\" or references a .pptx or .potx filename, regardless of what they plan to do with the content afterward. If a .pptx or .potx file needs to be opened, created, or touched, use this skill.\"", "files": 56, "bytes": 20796, "script": "אנגלית", "flagged": true}, {"name": "session-start-hook", "title": "startup-hook-skill", "desc": "Creating and developing startup hooks for Claude Code on the web. Use when the user wants to set up a repository for Claude Code on the web, create a SessionStart hook to ensure their project can run tests and linters during web sessions.", "files": 1, "bytes": 4931, "script": "אנגלית", "flagged": false}, {"name": "skill-creator", "title": "skill-creator", "desc": "Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.", "files": 18, "bytes": 33351, "script": "אנגלית", "flagged": false}, {"name": "skill-forge", "title": "skill-forge", "desc": "יצירת סקיל אישי חדש או שיפור סקיל אישי קיים — ראיון קצר, בחירת ארכיטיפ, כתיבת SKILL.md, בדיקה ואריזה לקובץ שניתן להתקין ישירות מהנייד. Use this skill whenever the user asks to create, write, build, draft, scaffold or improve a skill, including phrasings like \"מחולל סקילים\", \"תבנה לי סקיל\", \"צור סקיל\", \"בוא נהפוך את זה לסקיל\", \"תשפר לי את הסקיל\", \"turn this into a skill\", or \"make this repeatable\". Trigger it even when the user never says the word \"skill\" but describes wanting to reuse a process, a writing style, or a body of knowledge across future conversations, since capturing that as a skill is usually the right move. Do NOT use for skills intended for public submission to the skills-il directory at agentskills.co.il, which requires skills-il-skill-creator instead. Do NOT use for building MCP servers, which requires mcp-builder.", "files": 1, "bytes": 12759, "script": "מעורב", "flagged": false}, {"name": "skills-il-skill-creator", "title": "skills-il-skill-creator", "desc": "Interactive workflow for creating new skills for the skills-il organization. Guides through category selection, use case definition, folder scaffolding, metadata.json generation with bilingual metadata, instruction writing, Hebrew companion creation, and validation. Use when user asks to create a new skill, scaffold a skill for skills-il, write a SKILL.md, contribute a skill, new skill template, or liztor skill chadash. Enforces skills-il conventions (kebab-case naming, Hebrew transliterations, bilingual display names, progressive disclosure, validate-skill.sh compliance). Do NOT use for editing existing skills, creating skills for non-skills-il platforms, or generic markdown file creation.", "files": 5, "bytes": 26630, "script": "אנגלית", "flagged": false}, {"name": "super-pharm-stock-checker", "title": "super-pharm-stock-checker", "desc": "Checks real-time product stock availability at Super-Pharm branches across Israel via browser automation. Use when user asks to check Super-Pharm stock, \"bdika melay sofer pharm\", \"האם יש מלאי בסופר-פארם\", \"soofer pharm melay\", \"sofer pharm stock\", or any request to find a product at a nearby Super-Pharm branch. Supports Hebrew and English product names. Searches by product name and filters results by city. Do NOT use for Maccabi pharmacy stock (use maccabi-pharm-search instead).", "files": 7, "bytes": 11396, "script": "אנגלית", "flagged": false}, {"name": "tech-guide-design", "title": "tech-guide-design", "desc": "Comprehensive design system for creating technical guides and documentation with modern dark-themed aesthetic. Use when creating technical tutorials, documentation pages, API guides, system architecture documents, or any Hebrew RTL technical content requiring professional styling with code blocks, tables, alerts, badges, and interactive components.", "files": 1, "bytes": 12668, "script": "אנגלית", "flagged": true}, {"name": "theme-factory", "title": "theme-factory", "desc": "Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a new theme on-the-fly.", "files": 13, "bytes": 3124, "script": "אנגלית", "flagged": false}, {"name": "web-artifacts-builder", "title": "web-artifacts-builder", "desc": "Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for complex artifacts requiring state management, routing, or shadcn/ui components - not for simple single-file HTML/JSX artifacts.", "files": 5, "bytes": 3087, "script": "אנגלית", "flagged": true}, {"name": "xlsx", "title": "xlsx", "desc": "\"Use this skill any time a spreadsheet file is the primary input or output. This means any task where the user wants to: open, read, edit, or fix an existing .xlsx, .xlsm, .xltx, .csv, or .tsv file (e.g., adding columns, computing formulas, formatting, charting, cleaning messy data); create a new spreadsheet from scratch or from other data sources; or convert between tabular file formats. Trigger especially when the user references a spreadsheet file by name or path — even casually (like \\\"the xlsx in my downloads\\\") — and wants something done to it or produced from it. Also trigger for cleaning or restructuring messy tabular data files (malformed rows, misplaced headers, junk data) into proper spreadsheets. The deliverable must be a spreadsheet file. Do NOT trigger when the primary deliverable is a Word document, HTML report, standalone Python script, database pipeline, or Google Sheets API integration, even if tabular data is involved.\"", "files": 53, "bytes": 8598, "script": "אנגלית", "flagged": true}];
+const OVERLAPS = [{"a": "israeli-content-marketing", "b": "israeli-social-content", "score": 0.227, "shared": ["marketing", "outreach", "strategy", "israeli", "content", "covers", "hebrew", "posts"], "cross": false}, {"a": "pdf", "b": "pptx", "score": 0.151, "shared": ["extracting", "splitting", "combining", "whenever", "includes", "creating", "mentions", "reading"], "cross": false}, {"a": "docx", "b": "pdf", "score": 0.099, "shared": ["extracting", "whenever", "produce", "tables", "images", "files", "file", "pdfs"], "cross": false}, {"a": "docx", "b": "xlsx", "score": 0.096, "shared": ["spreadsheets", "deliverable", "formatting", "document", "create", "google", "files", "file"], "cross": false}, {"a": "tech-guide-design", "b": "web-artifacts-builder", "score": 0.082, "shared": ["components", "requiring", "creating", "modern"], "cross": false}, {"a": "doc-coauthoring", "b": "mcp-builder", "score": 0.08, "shared": ["creating", "context", "through", "guide"], "cross": false}, {"a": "docx", "b": "pptx", "score": 0.079, "shared": ["extracting", "templates", "whenever", "comments", "content", "working", "files", "file"], "cross": false}, {"a": "doc-coauthoring", "b": "tech-guide-design", "score": 0.075, "shared": ["documentation", "technical", "creating", "content"], "cross": false}, {"a": "hebrew-landing-design", "b": "tech-guide-design", "score": 0.078, "shared": ["documentation", "technical", "guides", "design", "hebrew", "pages", "rtl"], "cross": true}, {"a": "emotional-sharing", "b": "idea-storm", "score": 0.062, "shared": ["conversation", "technical", "phrasings", "question", "whenever", "sharing", "project", "mood"], "cross": true}, {"a": "idea-storm", "b": "skill-forge", "score": 0.044, "shared": ["phrasings", "whenever", "create", "build", "חדש", "בוא"], "cross": true}, {"a": "skill-forge", "b": "skills-il-skill-creator", "score": 0.044, "shared": ["skills-il", "scaffold", "writing", "create", "write"], "cross": true}, {"a": "mcp-builder", "b": "skill-forge", "score": 0.033, "shared": ["building", "servers", "mcp"], "cross": true}, {"a": "idea-storm", "b": "israeli-social-content", "score": 0.029, "shared": ["marketing", "social", "create"], "cross": true}, {"a": "detailed-responses", "b": "emotional-sharing", "score": 0.028, "shared": ["comprehensive", "conversation", "technical"], "cross": true}, {"a": "skill-creator", "b": "skill-forge", "score": 0.023, "shared": ["improve", "create"], "cross": true}, {"a": "idea-storm", "b": "marketing-content", "score": 0.009, "shared": ["ליצור"], "cross": true}, {"a": "emotional-sharing", "b": "explanatory-writing", "score": 0.0, "shared": [], "cross": true}];
+
+const grid = document.getElementById('grid');
+const q = document.getElementById('q');
+const shown = document.getElementById('shown');
+const empty = document.getElementById('empty');
+const fFlagged = document.getElementById('fFlagged');
+const fHeb = document.getElementById('fHeb');
+
+const fmt = n => n.toLocaleString('he-IL');
+
+function cardHTML(s, i) {
+  const num = String(i + 1).padStart(2, '0');
+  const kb = s.bytes >= 1024 ? (s.bytes / 1024).toFixed(1) + ' KB' : s.bytes + ' B';
+  return `
+    <article class="card" data-name="${s.name}">
+      <span class="num">${num}</span>
+      <h3 dir="auto">${s.title === s.name ? s.name.replace(/-/g, ' ') : s.title}</h3>
+      <span class="slug">${s.name}</span>
+      <p class="desc" dir="auto">${s.desc || 'אין תיאור.'}</p>
+      <button class="more" type="button">הצג הכל</button>
+      <div class="tags">
+        <span class="tag neutral">${s.script}</span>
+        <span class="tag neutral">${fmt(s.files)} קבצים</span>
+        <span class="tag neutral">${kb}</span>
+        ${s.flagged ? '<span class="tag warn">חופף</span>' : ''}
+      </div>
+    </article>`;
+}
+
+function render() {
+  const term = q.value.trim().toLowerCase();
+  const onlyFlagged = fFlagged.getAttribute('aria-pressed') === 'true';
+  const onlyHeb = fHeb.getAttribute('aria-pressed') === 'true';
+
+  const rows = SKILLS.filter(s => {
+    if (onlyFlagged && !s.flagged) return false;
+    if (onlyHeb && s.script === 'אנגלית') return false;
+    if (!term) return true;
+    return (s.name + ' ' + s.title + ' ' + s.desc).toLowerCase().includes(term);
+  });
+
+  grid.innerHTML = rows.map(cardHTML).join('');
+  shown.textContent = rows.length === SKILLS.length
+    ? `${fmt(SKILLS.length)} סקילים`
+    : `${fmt(rows.length)} מתוך ${fmt(SKILLS.length)}`;
+  empty.hidden = rows.length > 0;
+}
+
+grid.addEventListener('click', e => {
+  const btn = e.target.closest('.more');
+  if (!btn) return;
+  const card = btn.closest('.card');
+  const open = card.classList.toggle('open');
+  btn.textContent = open ? 'הסתר' : 'הצג הכל';
+});
+
+[fFlagged, fHeb].forEach(b => b.addEventListener('click', () => {
+  b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+  render();
+}));
+
+q.addEventListener('input', render);
+
+document.getElementById('pairs').innerHTML = OVERLAPS.length
+  ? OVERLAPS.map(p => `
+      <div class="pair${p.cross ? ' handled' : ''}">
+        <span class="names">${p.a} &harr; ${p.b}</span>
+        <span class="score${p.cross ? ' ok' : ''}">${Math.round(p.score * 100)}%</span>
+        <span class="state">${p.cross ? 'מפנים זה לזה' : 'לא מטופל'}</span>
+        <span class="shared">${p.shared.join(' · ')}</span>
+      </div>`).join('')
+  : '<p class="empty">לא נמצאו חפיפות מעל הסף.</p>';
+
+render();
+</script>
+</body>
+</html>
