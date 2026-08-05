@@ -39,7 +39,9 @@ def main() -> None:
         text = skill_md.read_text(encoding="utf-8", errors="replace")
         desc = field(frontmatter(text), "description")
         n_files = sum(1 for p in d.rglob("*") if p.is_file())
-        rows.append((d.name, desc, n_files, len(text)))
+        # stat, not len(text): the column is bytes, and most of these files are
+        # Hebrew, where one character is two or three UTF-8 bytes.
+        rows.append((d.name, desc, n_files, skill_md.stat().st_size))
 
     lines = [
         "# אינדקס סקילים",
