@@ -264,6 +264,7 @@ nav .spacer { margin-inline-start: auto; }
 }
 .tag.neutral { background: var(--cream-soft); color: var(--muted); border: 1px solid var(--border-soft); }
 .tag.warn { background: var(--status-yellow-bg); color: var(--status-yellow-fg); }
+.tag.trans { background: var(--status-green-bg); color: var(--status-green-fg); }
 
 /* === OVERLAPS === */
 .overlaps { margin-top: var(--sp-3xl); scroll-margin-top: 84px; }
@@ -323,8 +324,9 @@ footer { color: var(--muted); font-size: 14px; margin-top: var(--sp-3xl); paddin
 
   <div class="controls">
     <input class="search" id="q" type="search" placeholder="חיפוש בשם או בתיאור" aria-label="חיפוש סקילים">
+    <button class="chip" id="fTrans" type="button" aria-pressed="false">תרגום לעברית</button>
     <button class="chip" id="fFlagged" type="button" aria-pressed="false">רק חופפים</button>
-    <button class="chip" id="fHeb" type="button" aria-pressed="false">עברית</button>
+    <button class="chip" id="fHeb" type="button" aria-pressed="false">עברית במקור</button>
     <span class="count" id="shown"></span>
   </div>
 
@@ -365,20 +367,29 @@ const shown = document.getElementById('shown');
 const empty = document.getElementById('empty');
 const fFlagged = document.getElementById('fFlagged');
 const fHeb = document.getElementById('fHeb');
+const fTrans = document.getElementById('fTrans');
+
+SKILLS.forEach((s, i) => { s.idx = i; });
 
 const fmt = n => n.toLocaleString('he-IL');
 
-function cardHTML(s, i) {
+function cardHTML(s, i, translated) {
   const num = String(i + 1).padStart(2, '0');
   const kb = s.bytes >= 1024 ? (s.bytes / 1024).toFixed(1) + ' KB' : s.bytes + ' B';
+  // The original is the artefact; a translation only stands in when asked for
+  // and only when one exists for this skill.
+  const showHe = translated && s.he;
+  const body = showHe ? s.he : (s.desc || 'אין תיאור.');
   return `
     <article class="card" data-name="${s.name}">
       <span class="num">${num}</span>
       <h3 dir="auto">${s.title === s.name ? s.name.replace(/-/g, ' ') : s.title}</h3>
       <span class="slug">${s.name}</span>
-      <p class="desc" dir="auto">${s.desc || 'אין תיאור.'}</p>
+      <p class="desc" dir="auto">${body}</p>
       <button class="more" type="button">הצג הכל</button>
       <div class="tags">
+        ${showHe ? '<span class="tag trans">תרגום</span>' : ''}
+        ${showHe && s.stale ? '<span class="tag warn">תרגום לא מעודכן</span>' : ''}
         <span class="tag neutral">${s.script}</span>
         <span class="tag neutral">${fmt(s.files)} קבצים</span>
         <span class="tag neutral">${kb}</span>
@@ -391,15 +402,20 @@ function render() {
   const term = q.value.trim().toLowerCase();
   const onlyFlagged = fFlagged.getAttribute('aria-pressed') === 'true';
   const onlyHeb = fHeb.getAttribute('aria-pressed') === 'true';
+  const translated = fTrans.getAttribute('aria-pressed') === 'true';
 
   const rows = SKILLS.filter(s => {
     if (onlyFlagged && !s.flagged) return false;
     if (onlyHeb && s.script === 'אנגלית') return false;
     if (!term) return true;
-    return (s.name + ' ' + s.title + ' ' + s.desc).toLowerCase().includes(term);
+    // Search covers the translation too, so a Hebrew query finds an
+    // English-only skill through its translated text.
+    return (s.name + ' ' + s.title + ' ' + s.desc + ' ' + s.he).toLowerCase().includes(term);
   });
 
-  grid.innerHTML = rows.map(cardHTML).join('');
+  // The corner number is the skill's own ordinal, not its position in the
+  // filtered list, so it stays put while you search.
+  grid.innerHTML = rows.map(s => cardHTML(s, s.idx, translated)).join('');
   shown.textContent = rows.length === SKILLS.length
     ? `${fmt(SKILLS.length)} סקילים`
     : `${fmt(rows.length)} מתוך ${fmt(SKILLS.length)}`;
@@ -414,7 +430,7 @@ grid.addEventListener('click', e => {
   btn.textContent = open ? 'הסתר' : 'הצג הכל';
 });
 
-[fFlagged, fHeb].forEach(b => b.addEventListener('click', () => {
+[fFlagged, fHeb, fTrans].forEach(b => b.addEventListener('click', () => {
   b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
   render();
 }));

@@ -11,6 +11,7 @@ white, Frank Ruhl Libre paired with Heebo and nothing else, forest-tinted
 shadows, mustard as a rare accent.
 """
 
+import hashlib
 import html
 import json
 import pathlib
@@ -20,6 +21,7 @@ from itertools import combinations
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SKILLS = ROOT / "skills"
 OUT = ROOT / "viewer" / "index.html"
+TRANSLATIONS = ROOT / "viewer" / "translations.json"
 
 # Terms that appear in nearly every description because the format invites
 # them. Left in, they make every skill look like every other skill.
@@ -78,7 +80,43 @@ def script_of(text: str) -> str:
     return "עברית" if heb else "אנגלית"
 
 
+# A Latin token carrying a dot, slash or hyphen: ".docx", "Monday.com",
+# "React/Next.js", "validate-skill.sh". Those inner characters are BiDi-neutral,
+# so inside Hebrew flow they drift to the wrong end of the token and a file
+# extension renders as "docx." A bare Latin word needs no help and is left
+# alone.
+TECHNICAL = re.compile(
+    r"(?<![\w./-])(\.[A-Za-z][A-Za-z0-9]*|[A-Za-z][A-Za-z0-9]*(?:[._/-][A-Za-z0-9]+)+)"
+)
+
+
+def isolate(text: str) -> str:
+    """Escapes for HTML, then wraps technical tokens in <bdi>."""
+    return TECHNICAL.sub(r"<bdi>\1</bdi>", escape(text))
+
+
+def escape(text: str) -> str:
+    # Element content, never an attribute value, so quotes stay literal and the
+    # in-page search still matches a description the way it is written.
+    return html.escape(text, quote=False)
+
+
+def load_translations() -> dict:
+    if not TRANSLATIONS.is_file():
+        return {}
+    return json.loads(TRANSLATIONS.read_text(encoding="utf-8"))
+
+
 def collect() -> list:
+    """Reads every skill, attaching its Hebrew translation where one exists.
+
+    Each translation stores a hash of the description it was made from, so a
+    description edited upstream marks its translation stale instead of quietly
+    showing text that no longer matches. The original is always what the viewer
+    shows first: it is the artefact under inspection, and it is what actually
+    decides whether the skill loads.
+    """
+    tr = load_translations()
     rows = []
     for d in sorted(SKILLS.iterdir()):
         skill_md = d / "SKILL.md"
@@ -87,11 +125,17 @@ def collect() -> list:
         text = skill_md.read_text(encoding="utf-8", errors="replace")
         fm = frontmatter(text)
         desc = field(fm, "description")
+        entry = tr.get(d.name)
+        sha = hashlib.sha256(desc.encode()).hexdigest()[:16]
         rows.append(
             {
                 "name": d.name,
                 "title": field(fm, "name") or d.name,
-                "desc": desc,
+                # Rendered as HTML by the viewer, so both are escaped here and
+                # the Hebrew gets its technical tokens isolated.
+                "desc": escape(desc),
+                "he": isolate(entry["he"]) if entry else "",
+                "stale": bool(entry) and entry.get("src_sha") != sha,
                 "files": sum(1 for p in d.rglob("*") if p.is_file()),
                 "bytes": skill_md.stat().st_size,
                 "script": script_of(desc),
@@ -172,10 +216,17 @@ def main() -> None:
 
     OUT.parent.mkdir(exist_ok=True)
     OUT.write_text(page, encoding="utf-8")
+    translated = sum(1 for r in rows if r["he"])
+    stale = [r["name"] for r in rows if r["stale"]]
+    untranslated = [r["name"] for r in rows if r["script"] == "אנגלית" and not r["he"]]
     print(
         f"viewer written: {len(rows)} skills, {len(overlaps)} pairs "
-        f"({len(unhandled)} unhandled)"
+        f"({len(unhandled)} unhandled), {translated} translated"
     )
+    if stale:
+        print(f"  STALE translations (description changed): {', '.join(stale)}")
+    if untranslated:
+        print(f"  untranslated English: {', '.join(untranslated)}")
     for p in overlaps[:10]:
         mark = "   " if p["cross"] else " ! "
         print(f" {mark}{p['score']:.2f}  {p['a']} <-> {p['b']}  {' '.join(p['shared'][:4])}")
