@@ -16,7 +16,11 @@ import html
 import json
 import pathlib
 import re
+import sys
 from itertools import combinations
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import markdown  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SKILLS = ROOT / "skills"
@@ -107,6 +111,26 @@ def load_translations() -> dict:
     return json.loads(TRANSLATIONS.read_text(encoding="utf-8"))
 
 
+def translation_for(name: str, entry, sha: str):
+    """Returns (hebrew_text, is_stale) for one skill.
+
+    translations.json is hand-maintained, so a malformed or half-written entry
+    is a normal thing to hit. Warn and fall back to untranslated rather than
+    crashing the build: a viewer missing one translation is far more useful
+    than no viewer at all.
+    """
+    if entry is None:
+        return "", False
+    if not isinstance(entry, dict):
+        print(f"  translation for {name} is {type(entry).__name__}, expected object")
+        return "", False
+    he = entry.get("he") or ""
+    if not he:
+        print(f"  translation for {name} has no 'he' text")
+        return "", False
+    return he, entry.get("src_sha") != sha
+
+
 def collect() -> list:
     """Reads every skill, attaching its Hebrew translation where one exists.
 
@@ -125,8 +149,8 @@ def collect() -> list:
         text = skill_md.read_text(encoding="utf-8", errors="replace")
         fm = frontmatter(text)
         desc = field(fm, "description")
-        entry = tr.get(d.name)
         sha = hashlib.sha256(desc.encode()).hexdigest()[:16]
+        he_raw, stale = translation_for(d.name, tr.get(d.name), sha)
         rows.append(
             {
                 "name": d.name,
@@ -134,8 +158,11 @@ def collect() -> list:
                 # Rendered as HTML by the viewer, so both are escaped here and
                 # the Hebrew gets its technical tokens isolated.
                 "desc": escape(desc),
-                "he": isolate(entry["he"]) if entry else "",
-                "stale": bool(entry) and entry.get("src_sha") != sha,
+                "he": isolate(he_raw) if he_raw else "",
+                "stale": stale,
+                # The whole file, rendered, so a card can open its source
+                # instead of only advertising that it exists.
+                "body": markdown.render(markdown.body_of(text)),
                 "files": sum(1 for p in d.rglob("*") if p.is_file()),
                 "bytes": skill_md.stat().st_size,
                 "script": script_of(desc),

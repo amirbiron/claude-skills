@@ -51,6 +51,12 @@
 
 * { box-sizing: border-box; }
 
+/* One focus treatment for the whole page, in the palette. Without it the
+   browser default draws a black rectangle, which on the scrollable dialog body
+   reads as a stray rule under the header. */
+:focus-visible { outline: 2px solid var(--forest-light); outline-offset: 2px; }
+#srcBody:focus-visible { outline-offset: -2px; }
+
 /* The nav is sticky, so anchored scrolls need to clear it or the heading they
    land on ends up underneath it. */
 html { scroll-padding-top: 84px; }
@@ -295,6 +301,98 @@ nav .spacer { margin-inline-start: auto; }
 
 .empty { color: var(--muted); padding: var(--sp-2xl) 0; text-align: center; }
 
+/* === SOURCE DIALOG === */
+/* Native <dialog>: Esc, backdrop and focus return come free, and it stacks
+   above the grain layer without competing for z-index. */
+dialog.source {
+  width: min(860px, 94vw);
+  max-height: 88vh;
+  padding: 0;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-xl);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--sh-lg);
+  overflow: hidden;
+}
+dialog.source::backdrop { background: rgba(20, 48, 36, 0.45); }
+dialog.source .head {
+  display: flex; align-items: baseline; gap: var(--sp-md);
+  padding: var(--sp-lg) var(--sp-xl);
+  border-bottom: 1px solid var(--border-soft);
+  background: var(--cream-soft);
+}
+dialog.source .head h3 { font-size: 26px; }
+dialog.source .head .slug { direction: ltr; }
+dialog.source .close {
+  margin-inline-start: auto;
+  font-family: var(--font-body); font-size: 13px; font-weight: 500;
+  padding: 8px 18px;
+  border-radius: var(--r-full);
+  border: 1px solid var(--border);
+  background: transparent; color: var(--ink);
+  cursor: pointer;
+  transition: background var(--t-fast), border-color var(--t-fast);
+}
+dialog.source .close:hover { background: var(--paper); border-color: var(--forest-light); }
+dialog.source .body {
+  padding: var(--sp-xl);
+  overflow-y: auto;
+  max-height: calc(88vh - 90px);
+  line-height: 1.65;
+}
+dialog.source .body > :first-child { margin-top: 0; }
+dialog.source h2, dialog.source h3, dialog.source h4,
+dialog.source h5, dialog.source h6 {
+  font-family: var(--font-display);
+  margin: var(--sp-lg) 0 var(--sp-sm);
+  color: var(--forest-deep);
+}
+dialog.source h2 { font-size: 24px; }
+dialog.source h3 { font-size: 20px; }
+dialog.source h4, dialog.source h5, dialog.source h6 {
+  font-family: var(--font-body); font-size: 16px;
+}
+dialog.source p, dialog.source ul, dialog.source ol { margin: 0 0 var(--sp-md); }
+dialog.source li { margin-bottom: var(--sp-xs); }
+dialog.source code {
+  font-family: ui-monospace, monospace; font-size: 0.88em;
+  background: var(--cream-soft);
+  border: 1px solid var(--border-soft);
+  padding: 1px 5px; border-radius: var(--r-sm);
+}
+dialog.source pre {
+  direction: ltr; text-align: start;
+  background: var(--cream-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-md);
+  padding: var(--sp-md);
+  overflow-x: auto;
+  margin: 0 0 var(--sp-md);
+}
+dialog.source pre code { background: none; border: 0; padding: 0; font-size: 13px; }
+dialog.source blockquote {
+  margin: 0 0 var(--sp-md);
+  padding-inline-start: var(--sp-md);
+  border-inline-start: 3px solid var(--mustard);
+  color: var(--ink-soft);
+}
+dialog.source hr { border: 0; border-top: 1px solid var(--border-soft); margin: var(--sp-lg) 0; }
+dialog.source a { color: var(--forest); text-underline-offset: 0.25em; }
+dialog.source .tbl { overflow-x: auto; margin-bottom: var(--sp-md); }
+dialog.source table { border-collapse: collapse; width: 100%; font-size: 15px; }
+dialog.source th {
+  background: var(--cream-soft); text-align: start;
+  font: 500 13px/1.3 var(--font-body); letter-spacing: 0.06em;
+  color: var(--muted);
+  padding: var(--sp-sm) var(--sp-md);
+  border-bottom: 1px solid var(--border);
+}
+dialog.source td { padding: var(--sp-sm) var(--sp-md); border-bottom: 1px solid var(--border-soft); }
+
+.card { cursor: pointer; }
+.card .more, .card .tags { cursor: auto; }
+
 footer { color: var(--muted); font-size: 14px; margin-top: var(--sp-3xl); padding-top: var(--sp-lg); border-top: 1px solid var(--border-soft); }
 
 @media (prefers-reduced-motion: reduce) {
@@ -358,6 +456,15 @@ footer { color: var(--muted); font-size: 14px; margin-top: var(--sp-3xl); paddin
 
 </div>
 
+<dialog class="source" id="src" aria-labelledby="srcTitle">
+  <div class="head">
+    <h3 id="srcTitle" dir="auto"></h3>
+    <span class="slug" id="srcSlug"></span>
+    <button class="close" id="srcClose" type="button">סגירה</button>
+  </div>
+  <div class="body" id="srcBody" tabindex="0"></div>
+</dialog>
+
 <script>
 /*__DATA__*/
 
@@ -381,7 +488,8 @@ function cardHTML(s, i, translated) {
   const showHe = translated && s.he;
   const body = showHe ? s.he : (s.desc || 'אין תיאור.');
   return `
-    <article class="card" data-name="${s.name}">
+    <article class="card" data-name="${s.name}" tabindex="0" role="button"
+             aria-label="פתיחת המקור של ${s.name}">
       <span class="num">${num}</span>
       <h3 dir="auto">${s.title === s.name ? s.name.replace(/-/g, ' ') : s.title}</h3>
       <span class="slug">${s.name}</span>
@@ -422,13 +530,49 @@ function render() {
   empty.hidden = rows.length > 0;
 }
 
+const dlg = document.getElementById('src');
+const srcTitle = document.getElementById('srcTitle');
+const srcSlug = document.getElementById('srcSlug');
+const srcBody = document.getElementById('srcBody');
+
+function openSource(name) {
+  const s = SKILLS.find(x => x.name === name);
+  if (!s) return;
+  srcTitle.textContent = s.title === s.name ? s.name.replace(/-/g, ' ') : s.title;
+  srcSlug.textContent = s.name;
+  srcBody.innerHTML = s.body || '<p>הקובץ ריק מתוכן מעבר ל־frontmatter.</p>';
+  srcBody.scrollTop = 0;
+  dlg.showModal();
+  // Focus the close button rather than the scroll container: it is the
+  // predictable first stop, and Tab from there reaches the body for arrow-key
+  // scrolling.
+  document.getElementById('srcClose').focus();
+}
+
 grid.addEventListener('click', e => {
   const btn = e.target.closest('.more');
-  if (!btn) return;
-  const card = btn.closest('.card');
-  const open = card.classList.toggle('open');
-  btn.textContent = open ? 'הסתר' : 'הצג הכל';
+  if (btn) {
+    // Expanding the description in place should not also open the source.
+    const card = btn.closest('.card');
+    const open = card.classList.toggle('open');
+    btn.textContent = open ? 'הסתר' : 'הצג הכל';
+    return;
+  }
+  const card = e.target.closest('.card');
+  if (card) openSource(card.dataset.name);
 });
+
+// Keyboard parity: a card is reachable by Tab and opens on Enter or Space.
+grid.addEventListener('keydown', e => {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  const card = e.target.closest('.card');
+  if (!card || e.target.closest('.more')) return;
+  e.preventDefault();
+  openSource(card.dataset.name);
+});
+
+document.getElementById('srcClose').addEventListener('click', () => dlg.close());
+dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
 
 [fFlagged, fHeb, fTrans].forEach(b => b.addEventListener('click', () => {
   b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
