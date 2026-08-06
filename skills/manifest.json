@@ -1,6 +1,13 @@
 {
-  "lastUpdated": 1785884453550,
+  "lastUpdated": 1786051818415,
   "skills": [
+    {
+      "skillId": "skill_012koNHGzVuPQz8dnWdX3umL",
+      "name": "idea-storm",
+      "description": "בריינסטורם רעיונות לכלים ופרויקטים חדשים בסגנון שמדליק את אמיר — הרבה רעיונות קצרים וקונקרטיים מהחיים שלו, בלי הרצאות על פרויקטים פתוחים. Use this skill whenever the user consults about what to build or create next, asks for ideas for a new tool, bot, app or side project — phrasings like \"מה כדאי לי לבנות\", \"בוא נעשה בריינסטורם\", \"תן לי רעיונות\", \"מתלבט מה ליצור\", \"רעיון לפרויקט חדש\", \"מה אפשר לבנות עם\", \"משעמם לי בא לי לבנות משהו\". Trigger it even when the wondering appears mid technical conversation. Do NOT use for marketing or social post ideas, use marketing-content or israeli-social-content instead. Do NOT use for creating or improving skills, use skill-forge. Do NOT use once an idea was already chosen and the work moved to spec or implementation — that is regular development. Mood sharing without a build question belongs to emotional-sharing, not here.",
+      "source": "custom",
+      "updatedAt": "2026-08-04T22:57:07.100442Z"
+    },
     {
       "skillId": "skill_01QmUew3GYGH2CqmbRcyrSbD",
       "name": "hebrew-rtl-best-practices",
@@ -35,13 +42,6 @@
       "description": "Checks real-time product stock availability at Super-Pharm branches across Israel via browser automation. Use when user asks to check Super-Pharm stock, \"bdika melay sofer pharm\", \"האם יש מלאי בסופר-פארם\", \"soofer pharm melay\", \"sofer pharm stock\", or any request to find a product at a nearby Super-Pharm branch. Supports Hebrew and English product names. Searches by product name and filters results by city. Do NOT use for Maccabi pharmacy stock (use maccabi-pharm-search instead).",
       "source": "custom",
       "updatedAt": "2026-07-25T09:16:27.495406Z"
-    },
-    {
-      "skillId": "morning",
-      "name": "morning",
-      "description": "Render the user's morning brief as a styled HTML artifact, or set it up as a recurring weekday task. Use only when the user explicitly asks to run, see, or set up their morning brief, or if they invoke /morning by name. A question about their day, schedule, or calendar is not by itself a request for the brief; answer it directly instead.",
-      "source": "anthropic-example",
-      "updatedAt": "2026-08-03T20:31:43.061044Z"
     },
     {
       "skillId": "skill_01MWYnmLska6oJUTP3GjuMaW",
@@ -125,35 +125,42 @@
       "name": "doc-coauthoring",
       "description": "Guide users through a structured workflow for co-authoring documentation. Use when user wants to write documentation, proposals, technical specs, decision docs, or similar structured content. This workflow helps users efficiently transfer context, refine content through iteration, and verify the doc works for readers. Trigger when user mentions writing docs, creating proposals, drafting specs, or similar documentation tasks.",
       "source": "anthropic-example",
-      "updatedAt": "2026-08-03T20:31:42.476111Z"
+      "updatedAt": "2026-08-05T22:11:02.826094Z"
     },
     {
       "skillId": "web-artifacts-builder",
       "name": "web-artifacts-builder",
       "description": "Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for complex artifacts requiring state management, routing, or shadcn/ui components - not for simple single-file HTML/JSX artifacts.",
       "source": "anthropic-example",
-      "updatedAt": "2026-08-03T20:31:42.575194Z"
+      "updatedAt": "2026-08-05T22:11:02.909786Z"
     },
     {
       "skillId": "skill-creator",
       "name": "skill-creator",
       "description": "Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.",
       "source": "anthropic-example",
-      "updatedAt": "2026-08-03T20:31:42.537224Z"
+      "updatedAt": "2026-08-05T22:11:02.870515Z"
     },
     {
       "skillId": "theme-factory",
       "name": "theme-factory",
       "description": "Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a new theme on-the-fly.",
       "source": "anthropic-example",
-      "updatedAt": "2026-08-03T20:31:42.645242Z"
+      "updatedAt": "2026-08-05T22:11:02.986533Z"
     },
     {
       "skillId": "mcp-builder",
       "name": "mcp-builder",
       "description": "Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).",
       "source": "anthropic-example",
-      "updatedAt": "2026-08-03T20:31:42.617674Z"
+      "updatedAt": "2026-08-05T22:11:02.953808Z"
+    },
+    {
+      "skillId": "brand-guidelines",
+      "name": "brand-guidelines",
+      "description": "Applies Anthropic's official brand colors and typography to any sort of artifact that may benefit from having Anthropic's look-and-feel. Use it when brand colors or style guidelines, visual formatting, or company design standards apply.",
+      "source": "anthropic-example",
+      "updatedAt": "2026-08-05T22:11:02.920699Z"
     },
     {
       "skillId": "xlsx",
@@ -184,11 +191,11 @@
       "updatedAt": "2026-08-03T21:01:25.747439Z"
     },
     {
-      "skillId": "skill_012koNHGzVuPQz8dnWdX3umL",
-      "name": "idea-storm",
-      "description": "בריינסטורם רעיונות לכלים ופרויקטים חדשים בסגנון שמדליק את אמיר — הרבה רעיונות קצרים וקונקרטיים מהחיים שלו, בלי הרצאות על פרויקטים פתוחים. Use this skill whenever the user consults about what to build or create next, asks for ideas for a new tool, bot, app or side project — phrasings like \"מה כדאי לי לבנות\", \"בוא נעשה בריינסטורם\", \"תן לי רעיונות\", \"מתלבט מה ליצור\", \"רעיון לפרויקט חדש\", \"מה אפשר לבנות עם\", \"משעמם לי בא לי לבנות משהו\". Trigger it even when the wondering appears mid technical conversation. Do NOT use for marketing or social post ideas, use marketing-content or israeli-social-content instead. Do NOT use for creating or improving skills, use skill-forge. Do NOT use once an idea was already chosen and the work moved to spec or implementation — that is regular development. Mood sharing without a build question belongs to emotional-sharing, not here.",
+      "skillId": "skill_01P9NtATuFJ9x2bJd8bDEoD9",
+      "name": "engineering-temporal-reasoning",
+      "description": "Engineers temporal reasoning capabilities for AI agents — enabling them to trace decision chains, reconstruct causal sequences, and reason over event timelines spanning months or years of organizational history. Use when an agent must answer questions like \"what decisions led to X\", \"how did this situation evolve\", or when handling any query requiring temporal sequencing and causation across multiple events.",
       "source": "custom",
-      "updatedAt": "2026-08-04T22:57:07.100442Z"
+      "updatedAt": "2026-08-06T21:20:43.356001Z"
     }
   ]
 }

@@ -65,7 +65,7 @@ def frontmatter(text: str) -> str:
 
 def field(fm: str, name: str) -> str:
     m = re.search(
-        rf"^{name}:\s*(>-|\|)?\s*\n?((?:(?:  +.*|.*)\n?)*?)(?=^\w+:|\Z)", fm, re.M
+        rf"^{name}:\s*([>|][-+]?)?\s*\n?((?:(?:  +.*|.*)\n?)*?)(?=^\w+:|\Z)", fm, re.M
     )
     return " ".join(m.group(2).split()) if m else ""
 
