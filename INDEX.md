@@ -1,6 +1,6 @@
 # אינדקס סקילים
 
-28 סקילים ברמת חשבון, מצולמים מתוך `~/.claude/skills`.
+29 סקילים ברמת חשבון, מצולמים מתוך `~/.claude/skills`.
 נוצר על ידי `scripts/build-index.py`. אין לערוך ידנית.
 
 העמודה החשובה כאן היא התיאור. זה השדה היחיד שקובע אם סקיל נטען בכלל,
@@ -8,11 +8,13 @@
 
 | סקיל | קבצים | גודל SKILL.md | תיאור |
 | --- | --- | --- | --- |
+| `brand-guidelines` | 2 | 2,235 B | Applies Anthropic's official brand colors and typography to any sort of artifact that may benefit from having Anthropic's look-and-feel. Use it when brand colors or style guidelines, visual formatting, or company design standards apply. |
 | `debug-like-expert` | 1 | 11,213 B | Deep analysis debugging mode for complex issues. Activates methodical investigation protocol with evidence gathering, hypothesis testing, and rigorous verification. Use when standard troubleshooting fails or when issues require systematic root cause analysis. |
 | `detailed-responses` | 1 | 4,805 B | Override Anthropic's brevity guidelines to provide comprehensive, well-formatted responses. ALWAYS use this skill for ALL conversations with Claude Sonnet unless the user explicitly requests to disable it or asks for brief/concise responses. Trigger on ANY query, not just technical ones - this is a… |
 | `doc-coauthoring` | 1 | 15,815 B | Guide users through a structured workflow for co-authoring documentation. Use when user wants to write documentation, proposals, technical specs, decision docs, or similar structured content. This workflow helps users efficiently transfer context, refine content through iteration, and verify the doc… |
 | `docx` | 61 | 6,911 B | "Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files) or Word templates (.dotx files). Triggers include: any mention of 'Word doc', 'word document', '.docx', '.dotx', or requests to produce professional documents with formatting like tables of cont… |
 | `emotional-sharing` | 1 | 10,429 B | תגובה לשיתוף רגשי מתוך עמדה של חבר, לא של מבוגר אחראי. Use this skill whenever the user shares how he feels instead of asking a question — exhaustion, being awake too long, low energy, medication side effects, physical symptoms, burnout, frustration with a project, or a flat mood with no stated caus… |
+| `engineering-temporal-reasoning` | 2 | 5,872 B | > Engineers temporal reasoning capabilities for AI agents — enabling them to trace decision chains, reconstruct causal sequences, and reason over event timelines spanning months or years of organizational history. Use when an agent must answer questions like "what decisions led to X", "how did this… |
 | `explanatory-writing` | 1 | 10,560 B | סגנון כתיבה להסברים ומסמכי הדרכה — ישיר, בוגר, בלי hype, נשען על דוגמאות קונקרטיות במקום הפשטות. השתמש בסקיל הזה בכל פעם שאתה כותב מסמך הסבר, מדריך, תיעוד, קורס, או כל תוכן מובנה שנועד ללמד מישהו משהו. השתמש בו גם כשהמשתמש מבקש במפורש "תסביר בסגנון הזה", "תכתוב בסגנון ההסברים שלי", או מתייחס לסגנון… |
 | `hebrew-documents` | 1 | 12,886 B | יצירת מסמכים בעברית עם RTL נכון. השתמש בסקיל זה כאשר יוצרים קובצי DOCX, PDF או PPTX בעברית. |
 | `hebrew-landing-design` | 4 | 10,123 B | עיצוב דפי נחיתה בעברית ו-RTL שנמנע מהמראה הגנרי — בחירת גופן עברי מנומקת, מבנה שנגזר מרצף ההתנגדויות של הקהל, וניסוח עברי שלא נשמע מתורגם. Use this skill whenever the user asks to design, build, redesign or improve a Hebrew landing page, marketing page, sales page or homepage hero, including phrasin… |
@@ -24,7 +26,6 @@
 | `israeli-social-content` | 5 | 8,145 B | Create social media content optimized for Israeli audiences across Facebook, Instagram, TikTok, and LinkedIn. Use when user asks about Israeli social media strategy, Hebrew social posts, posting schedules for Israel, Hebrew hashtags, or Israeli Facebook group marketing. Covers platform-specific best… |
 | `marketing-content` | 3 | 5,623 B | כתיבת תוכן שיווקי ומדיה חברתית בעברית ובאנגלית. השתמש בסקיל זה תמיד כאשר המשתמש מבקש ליצור או לשפר פוסטים ל-LinkedIn, קפשנים ל-Instagram/Facebook, ניוזלטרים, עמודי מכירה, landing pages, מיילי קמפיין, תוכן לאתר, מודעות, או כל תוכן שיווקי אחר. מתאים גם לשיפור טיוטות קיימות, יצירת וריאציות A/B, וניסוח… |
 | `mcp-builder` | 10 | 9,092 B | Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK). |
-| `morning` | 3 | 14,524 B | "Render the user's morning brief as a styled HTML artifact, or set it up as a recurring weekday task. Use only when the user explicitly asks to run, see, or set up their morning brief, or if they invoke /morning by name. A question about their day, schedule, or calendar is not by itself a request fo… |
 | `pdf` | 12 | 8,072 B | Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, ext… |
 | `pptx` | 56 | 20,796 B | "Use this skill any time a .pptx or .potx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from any .pptx or .potx file (even if the extracted content will be used elsewhere, like in an e… |
 | `session-start-hook` | 1 | 4,931 B | Creating and developing startup hooks for Claude Code on the web. Use when the user wants to set up a repository for Claude Code on the web, create a SessionStart hook to ensure their project can run tests and linters during web sessions. |
