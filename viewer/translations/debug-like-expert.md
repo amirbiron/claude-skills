@@ -13,18 +13,18 @@ src_sha: b60d3dc967e66e06
 **להריץ בכל הפעלה, כדי לזהות מומחיות דיבוג ספציפית לתחום:**
 
 ```bash
-# אילו קבצים אנחנו מדבגים?
+# What files are we debugging?
 echo "FILE_TYPES:"
 find . -maxdepth 2 -type f 2>/dev/null | grep -E '\.(py|js|jsx|ts|tsx|rs|swift|c|cpp|go|java)$' | head -10
 
-# בדיקת סממנים של תחום
+# Check for domain indicators
 [ -f "package.json" ] && echo "DETECTED: JavaScript/Node project"
 [ -f "Cargo.toml" ] && echo "DETECTED: Rust project"
 [ -f "setup.py" ] || [ -f "pyproject.toml" ] && echo "DETECTED: Python project"
 [ -f "*.xcodeproj" ] || [ -f "Package.swift" ] && echo "DETECTED: Swift/macOS project"
 [ -f "go.mod" ] && echo "DETECTED: Go project"
 
-# סריקה אחר מומחיות תחום זמינה
+# Scan for available domain expertise
 echo "EXPERTISE_SKILLS:"
 ls ~/.claude/skills/expertise/ 2>/dev/null | head -5
 ```

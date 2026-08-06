@@ -564,10 +564,14 @@ function renderSource(showHebrew) {
   const s = srcCurrent;
   if (!s) return;
   const hasHe = !!s.body_he;
+  // The fallback carries its own dir: the container is ltr while the source is
+  // showing, and this sentence is Hebrew.
   srcBody.innerHTML = showHebrew
     ? s.body_he
-    : (s.body || '<p>הקובץ ריק מתוכן מעבר ל־frontmatter.</p>');
+    : (s.body || '<p dir="rtl">הקובץ ריק מתוכן מעבר ל־frontmatter.</p>');
   srcBody.dir = showHebrew ? 'rtl' : 'ltr';
+  // Screen readers pick pronunciation from lang, so it has to move with dir.
+  srcBody.lang = showHebrew ? 'he' : 'en';
   srcLang.hidden = !hasHe;
   srcLang.textContent = showHebrew ? 'המקור באנגלית' : 'תרגום לעברית';
   srcLang.setAttribute('aria-pressed', String(showHebrew));

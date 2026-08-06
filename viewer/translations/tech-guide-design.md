@@ -254,7 +254,7 @@ tr:hover {
     background: rgba(0, 136, 204, 0.15);
     border-right: 4px solid var(--primary-color);
 }
-/* אייקון: 💡 או ℹ️ */
+/* Icon: 💡 or ℹ️ */
 ```
 
 #### התראת הצלחה
@@ -264,7 +264,7 @@ tr:hover {
     background: rgba(46, 204, 113, 0.15);
     border-right: 4px solid var(--secondary-color);
 }
-/* אייקון: ✅ */
+/* Icon: ✅ */
 ```
 
 #### התראת אזהרה
@@ -274,7 +274,7 @@ tr:hover {
     background: rgba(243, 156, 18, 0.15);
     border-right: 4px solid var(--warning-color);
 }
-/* אייקון: ⚠️ */
+/* Icon: ⚠️ */
 ```
 
 #### התראת סכנה
@@ -284,7 +284,7 @@ tr:hover {
     background: rgba(231, 76, 60, 0.15);
     border-right: 4px solid var(--danger-color);
 }
-/* אייקון: ❌ */
+/* Icon: ❌ */
 ```
 
 ### דוגמת HTML
@@ -499,7 +499,7 @@ li {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>מדריך טכני</title>
     <style>
-        /* כאן נכנסים כל משתני ה-CSS והסגנונות */
+        /* Include all CSS variables and styles */
     </style>
 </head>
 <body>
@@ -522,7 +522,7 @@ li {
 
         <section id="section1">
             <h2><span class="icon">📊</span> נושא ראשון</h2>
-            <!-- תוכן כאן -->
+            <!-- Content here -->
         </section>
     </div>
 </body>
