@@ -26,6 +26,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 SKILLS = ROOT / "skills"
 OUT = ROOT / "viewer" / "index.html"
 TRANSLATIONS = ROOT / "viewer" / "translations.json"
+BODY_TRANSLATIONS = ROOT / "viewer" / "translations"
 
 # Terms that appear in nearly every description because the format invites
 # them. Left in, they make every skill look like every other skill.
@@ -131,6 +132,33 @@ def translation_for(name: str, entry, sha: str):
     return he, entry.get("src_sha") != sha
 
 
+def load_body_translation(name: str, src: str):
+    """Returns (rendered_html, is_stale) for a full-body Hebrew translation.
+
+    These live in viewer/translations/<skill>.md rather than beside the source
+    as SKILL_HE.md, because snapshot-skills.sh replaces skills/ wholesale from
+    the account: anything added inside it disappears on the next refresh without
+    a word. Outside the mirror they survive.
+
+    Each file carries src_sha, a hash of the SKILL.md it was translated from, so
+    an upstream edit marks the translation stale instead of leaving Hebrew that
+    quietly no longer matches the English beside it.
+    """
+    path = BODY_TRANSLATIONS / f"{name}.md"
+    if not path.is_file():
+        return "", False
+    text = path.read_text(encoding="utf-8", errors="replace")
+    sha = hashlib.sha256(src.encode()).hexdigest()[:16]
+    declared = field(frontmatter(text), "src_sha")
+    if not declared:
+        print(f"  body translation for {name} has no src_sha; treating as stale")
+    body = markdown.body_of(text)
+    if not body.strip():
+        print(f"  body translation for {name} is empty, skipping")
+        return "", False
+    return markdown.render(body), declared != sha
+
+
 def collect() -> list:
     """Reads every skill, attaching its Hebrew translation where one exists.
 
@@ -151,6 +179,7 @@ def collect() -> list:
         desc = field(fm, "description")
         sha = hashlib.sha256(desc.encode()).hexdigest()[:16]
         he_raw, stale = translation_for(d.name, tr.get(d.name), sha)
+        body_he, body_he_stale = load_body_translation(d.name, text)
         rows.append(
             {
                 "name": d.name,
@@ -163,6 +192,10 @@ def collect() -> list:
                 # The whole file, rendered, so a card can open its source
                 # instead of only advertising that it exists.
                 "body": markdown.render(markdown.body_of(text)),
+                # Inlined rather than fetched, so the page keeps its translations
+                # when it is saved and opened offline.
+                "body_he": body_he,
+                "body_he_stale": body_he_stale,
                 "files": sum(1 for p in d.rglob("*") if p.is_file()),
                 "bytes": skill_md.stat().st_size,
                 "script": script_of(desc),
