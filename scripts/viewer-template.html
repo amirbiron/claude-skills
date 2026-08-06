@@ -335,6 +335,20 @@ dialog.source .close {
   transition: background var(--t-fast), border-color var(--t-fast);
 }
 dialog.source .close:hover { background: var(--paper); border-color: var(--forest-light); }
+/* Only the first rendered button pushes the pair to the far edge. `hidden` is
+   display:none, so it leaves the flex row but a sibling selector still matches
+   it — hence the second rule, which hands the push to the close button on the
+   skills that carry no translation. */
+dialog.source .close + .close { margin-inline-start: 0; }
+dialog.source .close[hidden] + .close { margin-inline-start: auto; }
+dialog.source .stale-note {
+  margin: 0;
+  padding: var(--sp-sm) var(--sp-xl);
+  font-size: 13px;
+  color: var(--ink-soft);
+  background: var(--mustard-wash, rgba(212, 165, 58, 0.18));
+  border-bottom: 1px solid var(--border-soft);
+}
 dialog.source .body {
   padding: var(--sp-xl);
   overflow-y: auto;
@@ -460,8 +474,12 @@ footer { color: var(--muted); font-size: 14px; margin-top: var(--sp-3xl); paddin
   <div class="head">
     <h3 id="srcTitle" dir="auto"></h3>
     <span class="slug" id="srcSlug"></span>
+    <button class="close" id="srcLang" type="button" hidden aria-pressed="false"></button>
     <button class="close" id="srcClose" type="button">סגירה</button>
   </div>
+  <p class="stale-note" id="srcStale" hidden>
+    המקור באנגלית השתנה מאז שהתרגום נכתב. ייתכן שהוא כבר לא תואם.
+  </p>
   <div class="body" id="srcBody" tabindex="0"></div>
 </dialog>
 
@@ -534,14 +552,40 @@ const dlg = document.getElementById('src');
 const srcTitle = document.getElementById('srcTitle');
 const srcSlug = document.getElementById('srcSlug');
 const srcBody = document.getElementById('srcBody');
+const srcLang = document.getElementById('srcLang');
+const srcStale = document.getElementById('srcStale');
+
+// The source is what the dialog opens on, always. It is the artefact under
+// inspection and the thing that actually decides whether the skill loads; the
+// translation is a reading aid sitting one click behind it.
+let srcCurrent = null;
+
+function renderSource(showHebrew) {
+  const s = srcCurrent;
+  if (!s) return;
+  const hasHe = !!s.body_he;
+  // The fallback carries its own dir: the container is ltr while the source is
+  // showing, and this sentence is Hebrew.
+  srcBody.innerHTML = showHebrew
+    ? s.body_he
+    : (s.body || '<p dir="rtl">הקובץ ריק מתוכן מעבר ל־frontmatter.</p>');
+  srcBody.dir = showHebrew ? 'rtl' : 'ltr';
+  // Screen readers pick pronunciation from lang, so it has to move with dir.
+  srcBody.lang = showHebrew ? 'he' : 'en';
+  srcLang.hidden = !hasHe;
+  srcLang.textContent = showHebrew ? 'המקור באנגלית' : 'תרגום לעברית';
+  srcLang.setAttribute('aria-pressed', String(showHebrew));
+  srcStale.hidden = !(showHebrew && s.body_he_stale);
+  srcBody.scrollTop = 0;
+}
 
 function openSource(name) {
   const s = SKILLS.find(x => x.name === name);
   if (!s) return;
+  srcCurrent = s;
   srcTitle.textContent = s.title === s.name ? s.name.replace(/-/g, ' ') : s.title;
   srcSlug.textContent = s.name;
-  srcBody.innerHTML = s.body || '<p>הקובץ ריק מתוכן מעבר ל־frontmatter.</p>';
-  srcBody.scrollTop = 0;
+  renderSource(false);
   dlg.showModal();
   // Focus the close button rather than the scroll container: it is the
   // predictable first stop, and Tab from there reaches the body for arrow-key
@@ -572,6 +616,9 @@ grid.addEventListener('keydown', e => {
 });
 
 document.getElementById('srcClose').addEventListener('click', () => dlg.close());
+srcLang.addEventListener('click', () =>
+  renderSource(srcLang.getAttribute('aria-pressed') !== 'true')
+);
 dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
 
 [fFlagged, fHeb, fTrans].forEach(b => b.addEventListener('click', () => {

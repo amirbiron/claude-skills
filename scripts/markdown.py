@@ -31,6 +31,32 @@ BOLD = re.compile(r"\*\*([^*]+)\*\*")
 ITALIC = re.compile(r"(?<![*\w])\*([^*\n]+)\*(?!\*)")
 LINK = re.compile(r"\[([^\]]+)\]\(([^)\s]+)\)")
 
+# Only schemes that cannot execute. skills/ mirrors whatever is installed from
+# a marketplace, so the markdown here is third-party text even though it sits in
+# a private repo.
+SAFE_SCHEME = re.compile(r"(?:https?:|mailto:)", re.I)
+
+
+def href(target: str) -> str:
+    """A link target safe to place inside a double-quoted attribute.
+
+    Two separate holes. The scheme: `javascript:` renders as a live link that
+    runs on click. And the quoting: the surrounding escape runs with
+    quote=False, so a `"` in the target closes the attribute early and anything
+    after it becomes markup — and since the LINK pattern only forbids spaces and
+    `)`, an injected attribute can be separated with `/` instead of a space.
+
+    Relative paths and fragments stay as they are; they cannot execute. Anything
+    with a scheme must be http, https or mailto to survive.
+
+    Only the quote is escaped here. The caller already ran the whole line through
+    html.escape with quote=False, so `&`, `<` and `>` are encoded — escaping them
+    a second time turns a query string's `&` into `&amp;amp;` and breaks the URL.
+    """
+    if ":" in target.split("/")[0] and not SAFE_SCHEME.match(target):
+        return ""
+    return target.replace('"', "&quot;")
+
 
 def inline(text: str) -> str:
     out = html.escape(text, quote=False)
@@ -41,7 +67,10 @@ def inline(text: str) -> str:
         return f"\x00{len(holds) - 1}\x00"
 
     out = INLINE_CODE.sub(hold, out)
-    out = LINK.sub(r'<a href="\2" rel="noopener noreferrer">\1</a>', out)
+    out = LINK.sub(
+        lambda m: f'<a href="{href(m.group(2))}" rel="noopener noreferrer">{m.group(1)}</a>',
+        out,
+    )
     out = BOLD.sub(r"<strong>\1</strong>", out)
     out = ITALIC.sub(r"<em>\1</em>", out)
     return re.sub(r"\x00(\d+)\x00", lambda m: holds[int(m.group(1))], out)
