@@ -50,7 +50,51 @@ cleanup() {
 }
 trap cleanup EXIT
 
-cp -r "$SRC/." "$STAGE/"
+# Keyed on where SKILL.md actually is, rather than copying $SRC wholesale.
+#
+# Claude materialises the account's skills under $SRC, but not at a fixed
+# depth: they used to sit directly inside it, and now most arrive one level
+# down in synced/ while a few stay at the top. A plain copy mirrors that
+# nesting into skills/, where both builders look for SKILL.md exactly one level
+# down — so they would see one skill instead of thirty-two, and because this is
+# a mirror rather than a merge, committing that would delete all the rest. It
+# fails silently too: every command still exits 0.
+#
+# Flattening by basename keeps skills/ in the shape the rest of the repo
+# expects, and leaves it working whichever depth the next layout change picks.
+found=0
+while IFS= read -r skill; do
+  name="$(basename "$skill")"
+  if [ -e "$STAGE/$name" ]; then
+    echo "Two skills named $name under $SRC; refusing to pick one." >&2
+    exit 1
+  fi
+  cp -r "$skill" "$STAGE/$name"
+  found=$((found + 1))
+done < <(find "$SRC" -mindepth 2 -maxdepth 3 -name SKILL.md -printf '%h\n' | sort)
+
+if [ "$found" -eq 0 ]; then
+  echo "No SKILL.md found anywhere under $SRC." >&2
+  exit 1
+fi
+
+# Carried alongside the skills because the previous snapshot has one, and a
+# mirror that drops a file it used to hold is not mirroring.
+manifest="$(find "$SRC" -maxdepth 2 -name manifest.json | head -1)"
+[ -n "$manifest" ] && cp "$manifest" "$STAGE/manifest.json"
+
+# A snapshot that collapses is the signature of the source layout moving
+# again, not of thirty skills being deleted from the account on one afternoon.
+# The whole point of the staging swap above is that a bad snapshot never lands,
+# and "structurally bad" belongs in that category as much as "interrupted".
+if [ -d "$DEST" ] && [ "${FORCE:-}" != "1" ]; then
+  had=$(find "$DEST" -mindepth 2 -maxdepth 2 -name SKILL.md | wc -l | tr -d ' ')
+  if [ "$had" -gt 0 ] && [ "$found" -lt $(( (had + 1) / 2 )) ]; then
+    echo "Refusing: skills/ holds $had skills, this snapshot found only $found." >&2
+    echo "Check the layout under $SRC, or re-run with FORCE=1 if that is real." >&2
+    exit 1
+  fi
+fi
 
 # Both moves are renames within the repo, so the window where skills/ does not
 # exist is a single syscall wide rather than a whole copy long.
@@ -61,6 +105,6 @@ fi
 mv "$STAGE" "$DEST"
 STAGE=""  # consumed by the move; the trap must not delete the new snapshot
 
-count=$(find "$DEST" -mindepth 1 -maxdepth 1 -type d | wc -l | tr -d ' ')
+count=$(find "$DEST" -mindepth 2 -maxdepth 2 -name SKILL.md | wc -l | tr -d ' ')
 files=$(find "$DEST" -type f | wc -l | tr -d ' ')
 echo "Snapshotted $count skills, $files files."

@@ -1,0 +1,95 @@
+name: Rebuild index and viewer
+
+# INDEX.md and viewer/index.html are generated files. Until now they were only
+# regenerated when someone remembered to run the scripts by hand, so a skill
+# edited in skills/ could sit for days while the viewer still showed the old
+# text. This job closes that gap: change a source, get a rebuilt viewer,
+# committed here and published to GitHub Pages in the same run.
+#
+# What this does NOT do is refresh skills/ itself. That snapshot is copied from
+# ~/.claude/skills, which only exists inside a Claude Code session container,
+# and no runner has it. scripts/snapshot-skills.sh still has to be run from a
+# session. Everything downstream of the snapshot is automatic from here.
+
+on:
+  push:
+    branches: [main]
+    # Deliberately excludes INDEX.md and viewer/index.html: this job writes
+    # those, and listing them here would have it re-trigger on its own commit.
+    paths:
+      - 'skills/**'
+      - 'viewer/translations/**'
+      - 'viewer/translations.json'
+      - 'scripts/**'
+      - '.github/workflows/build-viewer.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write   # commit the rebuilt files
+  pages: write      # publish them
+  id-token: write   # required by deploy-pages to prove the run's identity
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # Two pushes in quick succession would otherwise race to commit the same
+    # two files, and the loser fails on a stale ref. Later push wins; the
+    # earlier run is cancelled before it can push, not after.
+    concurrency:
+      group: build-viewer
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # No dependencies to install: both builders are standard library only.
+      - name: Rebuild
+        run: |
+          python3 scripts/build-index.py
+          python3 scripts/build-viewer.py
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- INDEX.md viewer/index.html; then
+            echo "Already up to date."
+            exit 0
+          fi
+          git config user.name  'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add INDEX.md viewer/index.html
+          git commit -m 'רענון אוטומטי של האינדקס והצפייה'
+          git push
+
+      # Publishes the file this run just built, not the one in the repo at
+      # checkout time. Those are the same once the commit above lands, but
+      # uploading from the workspace means the site is never a run behind.
+      - uses: actions/configure-pages@v5
+        with:
+          # Turns Pages on the first time this runs, so the site does not
+          # depend on someone having flipped a settings switch by hand.
+          enablement: true
+
+      # viewer/ rather than the repo root: the site is the viewer, and the
+      # skill sources are already readable on GitHub itself.
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: viewer
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    # Its own group, and deliberately without cancel-in-progress: a half-
+    # applied deployment is worse than a redundant one, so a deploy already
+    # underway is left to finish and the next run queues behind it.
+    concurrency:
+      group: pages-deploy
+      cancel-in-progress: false
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

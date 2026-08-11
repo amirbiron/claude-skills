@@ -1,6 +1,6 @@
 # אינדקס סקילים
 
-29 סקילים ברמת חשבון, מצולמים מתוך `~/.claude/skills`.
+32 סקילים ברמת חשבון, מצולמים מתוך `~/.claude/skills`.
 נוצר על ידי `scripts/build-index.py`. אין לערוך ידנית.
 
 העמודה החשובה כאן היא התיאור. זה השדה היחיד שקובע אם סקיל נטען בכלל,
@@ -8,8 +8,11 @@
 
 | סקיל | קבצים | גודל SKILL.md | תיאור |
 | --- | --- | --- | --- |
+| `agensi-skill-authoring` | 3 | 7,227 B | "A practical, step-by-step guide to writing clear, effective, and reusable SKILL.md files that follow the Agensi open standard and work reliably across different AI coding agents." |
 | `brand-guidelines` | 2 | 2,235 B | Applies Anthropic's official brand colors and typography to any sort of artifact that may benefit from having Anthropic's look-and-feel. Use it when brand colors or style guidelines, visual formatting, or company design standards apply. |
+| `click-to-convert-audit` | 3 | 8,212 B | Audit a landing page to assess how likely it is to convert traffic from Google Ads, and produce a prioritized, evidence-backed list of fixes. Use this whenever the user shares a landing page URL and asks whether it will convert, whether it's ready to run paid traffic to, or about Quality Score, land… |
 | `debug-like-expert` | 1 | 11,213 B | Deep analysis debugging mode for complex issues. Activates methodical investigation protocol with evidence gathering, hypothesis testing, and rigorous verification. Use when standard troubleshooting fails or when issues require systematic root cause analysis. |
+| `design-system-md` | 2 | 5,208 B | סקיל ליצירת UI על בסיס DESIGN.md. מושך מערכות עיצוב של 58 מותגים (Apple, Stripe, Notion ועוד) באמצעות ה‑CLI‏ getdesign ומחיל אותן על הפרויקט. השתמש בו בכל יצירת ממשק — דף נחיתה, דשבורד, אפליקציית ווב — כדי להחיל עיצוב באיכות מותגית בבת אחת. |
 | `detailed-responses` | 1 | 4,805 B | Override Anthropic's brevity guidelines to provide comprehensive, well-formatted responses. ALWAYS use this skill for ALL conversations with Claude Sonnet unless the user explicitly requests to disable it or asks for brief/concise responses. Trigger on ANY query, not just technical ones - this is a… |
 | `doc-coauthoring` | 1 | 15,815 B | Guide users through a structured workflow for co-authoring documentation. Use when user wants to write documentation, proposals, technical specs, decision docs, or similar structured content. This workflow helps users efficiently transfer context, refine content through iteration, and verify the doc… |
 | `docx` | 61 | 6,911 B | "Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files) or Word templates (.dotx files). Triggers include: any mention of 'Word doc', 'word document', '.docx', '.dotx', or requests to produce professional documents with formatting like tables of cont… |
