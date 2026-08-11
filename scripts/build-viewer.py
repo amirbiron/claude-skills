@@ -240,7 +240,13 @@ def find_overlaps(rows: list) -> list:
                     "a": a["name"],
                     "b": b["name"],
                     "score": round(score, 3),
-                    "shared": sorted(shared, key=len, reverse=True)[:8],
+                    # Longest first, alphabetical within a length. The tie-break
+                    # is what makes the build reproducible: `shared` is a set,
+                    # so ordering by length alone leaves equal-length terms in
+                    # set-iteration order, which Python's per-process string
+                    # hash seed randomises. Same skills in, different bytes out,
+                    # and every automated rebuild becomes a spurious commit.
+                    "shared": sorted(shared, key=lambda t: (-len(t), t))[:8],
                     "cross": cross,
                 }
             )
