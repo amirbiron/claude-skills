@@ -2,7 +2,11 @@
 
 ---
 
-ה-`index.html` ב-<mark>Codekeeper</mark>: [כאן](https://code-keeper-webapp.onrender.com/file/6a72d9edc9b55ce95e95ebe4)
+הצופה החי: **[amirbiron.github.io/claude-skills](https://amirbiron.github.io/claude-skills/)**
+מתפרסם מחדש בכל דחיפה ל‑main. הריפו ציבורי, ולכן גם העמוד הזה.
+
+יש גם [עותק ב‑Codekeeper](https://code-keeper-webapp.onrender.com/file/6a72d9edc9b55ce95e95ebe4),
+אבל הוא צילום חד‑פעמי מ‑5 באוגוסט ולא מתעדכן. הקישור למעלה הוא זה שאפשר לסמוך עליו.
 
 ---
 
@@ -52,8 +56,13 @@ git add -A && git commit -m "רענון צילום הסקילים" && git push
 
 `INDEX.md` ו‑`viewer/index.html` הם קבצים נוצרים, ו‑`.github/workflows/build-viewer.yml`
 מייצר אותם מחדש בכל דחיפה ל‑main שנוגעת ב‑`skills/`, ב‑`scripts/` או בתרגומים,
-ומקמיט את התוצאה אם היא השתנתה. אין יותר צורך להריץ את הבילדרים ביד לפני דחיפה
-(אפשר עדיין, כדי לראות את התוצאה מקומית).
+מקמיט את התוצאה אם היא השתנתה, ומפרסם את `viewer/` ל‑GitHub Pages באותה הרצה.
+אין יותר צורך להריץ את הבילדרים ביד לפני דחיפה (אפשר עדיין, כדי לראות את
+התוצאה מקומית).
+
+**Pages פירושו שהצופה גלוי לכל מי שיש לו את הכתובת**, כולל `emotional-sharing`
+ו‑`idea-storm` שכתובים עליך אישית. הריפו עצמו ציבורי כרגע, כך שהמקורות חשופים
+ממילא, אבל שווה להחזיק את זה בראש.
 
 **הצילום עצמו נשאר ידני, ואי אפשר אחרת.** `skills/` מועתק מ‑`~/.claude/skills`,
 תיקייה שקיימת רק בתוך קונטיינר של סשן Claude Code. לרץ' של GitHub Actions אין
