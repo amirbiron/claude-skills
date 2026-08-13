@@ -1,6 +1,6 @@
 # אינדקס סקילים
 
-32 סקילים ברמת חשבון, מצולמים מתוך `~/.claude/skills`.
+33 סקילים ברמת חשבון, מצולמים מתוך `~/.claude/skills`.
 נוצר על ידי `scripts/build-index.py`. אין לערוך ידנית.
 
 העמודה החשובה כאן היא התיאור. זה השדה היחיד שקובע אם סקיל נטען בכלל,
@@ -32,6 +32,7 @@
 | `pdf` | 12 | 8,072 B | Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, ext… |
 | `pptx` | 56 | 20,796 B | "Use this skill any time a .pptx or .potx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from any .pptx or .potx file (even if the extracted content will be used elsewhere, like in an e… |
 | `session-start-hook` | 1 | 4,931 B | Creating and developing startup hooks for Claude Code on the web. Use when the user wants to set up a repository for Claude Code on the web, create a SessionStart hook to ensure their project can run tests and linters during web sessions. |
+| `skill-corner-post` | 1 | 7,873 B | כתיבת פוסט "פינת הסקיל" לערוץ הטלגרם AndroidAndAI בפורמט הקבוע - כותרת, הבעיה שהסקיל פותר, מתי להשתמש, מקור, גיטהאב והודעת ZIP נפרדת, ודחיפתו לערוץ דרך קונקטור Postproxy. השתמש בסקיל הזה תמיד כשהמשתמש מבקש "תעשה פינת סקיל", "פוסט סקיל לערוץ", "תכתוב על הסקיל X לערוץ", מזכיר "פינת הסקיל", או מעביר לי… |
 | `skill-creator` | 18 | 33,351 B | Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better t… |
 | `skill-forge` | 1 | 12,759 B | יצירת סקיל אישי חדש או שיפור סקיל אישי קיים — ראיון קצר, בחירת ארכיטיפ, כתיבת SKILL.md, בדיקה ואריזה לקובץ שניתן להתקין ישירות מהנייד. Use this skill whenever the user asks to create, write, build, draft, scaffold or improve a skill, including phrasings like "מחולל סקילים", "תבנה לי סקיל", "צור סקיל… |
 | `skills-il-skill-creator` | 5 | 26,630 B | Interactive workflow for creating new skills for the skills-il organization. Guides through category selection, use case definition, folder scaffolding, metadata.json generation with bilingual metadata, instruction writing, Hebrew companion creation, and validation. Use when user asks to create a ne… |
