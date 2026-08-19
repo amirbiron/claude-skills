@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "required": [
+    "review_depth",
+    "overall_risk",
+    "findings"
+  ],
+  "properties": {
+    "review_depth": {
+      "enum": [
+        "LIGHT",
+        "STANDARD",
+        "DEEP"
+      ]
+    },
+    "overall_risk": {
+      "type": "string"
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "$ref": "finding.schema.json"
+      }
+    }
+  }
+}

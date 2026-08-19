@@ -1,0 +1,67 @@
+{
+  "type": "object",
+  "required": [
+    "id",
+    "category",
+    "severity",
+    "confidence",
+    "evidence_status",
+    "location",
+    "problem",
+    "evidence",
+    "impact",
+    "recommendation"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "severity": {
+      "enum": [
+        "CRITICAL",
+        "HIGH",
+        "MEDIUM",
+        "LOW",
+        "INFO"
+      ]
+    },
+    "confidence": {
+      "enum": [
+        "HIGH",
+        "MEDIUM",
+        "LOW"
+      ]
+    },
+    "evidence_status": {
+      "enum": [
+        "VERIFIED",
+        "STRONGLY SUPPORTED",
+        "UNVERIFIED"
+      ]
+    },
+    "location": {
+      "type": "string"
+    },
+    "problem": {
+      "type": "string"
+    },
+    "evidence": {
+      "type": "string"
+    },
+    "impact": {
+      "type": "string"
+    },
+    "root_cause": {
+      "type": "string"
+    },
+    "recommendation": {
+      "type": "string"
+    },
+    "suggested_test": {
+      "type": "string"
+    }
+  }
+}
