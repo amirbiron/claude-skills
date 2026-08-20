@@ -1,6 +1,6 @@
 # אינדקס סקילים
 
-35 סקילים ברמת חשבון, מצולמים מתוך `~/.claude/skills`.
+34 סקילים ברמת חשבון, מצולמים מתוך `~/.claude/skills`.
 נוצר על ידי `scripts/build-index.py`. אין לערוך ידנית.
 
 העמודה החשובה כאן היא התיאור. זה השדה היחיד שקובע אם סקיל נטען בכלל,
@@ -8,7 +8,6 @@
 
 | סקיל | קבצים | גודל SKILL.md | תיאור |
 | --- | --- | --- | --- |
-| `ai-code-reviewer` | 17 | 7,126 B | Evidence-first, read-only AI code review that discovers, verifies, prioritizes, and explains meaningful code problems. |
 | `brand-guidelines` | 2 | 2,235 B | Applies Anthropic's official brand colors and typography to any sort of artifact that may benefit from having Anthropic's look-and-feel. Use it when brand colors or style guidelines, visual formatting, or company design standards apply. |
 | `click-to-convert-audit` | 3 | 8,212 B | Audit a landing page to assess how likely it is to convert traffic from Google Ads, and produce a prioritized, evidence-backed list of fixes. Use this whenever the user shares a landing page URL and asks whether it will convert, whether it's ready to run paid traffic to, or about Quality Score, land… |
 | `debug-like-expert` | 1 | 11,213 B | Deep analysis debugging mode for complex issues. Activates methodical investigation protocol with evidence gathering, hypothesis testing, and rigorous verification. Use when standard troubleshooting fails or when issues require systematic root cause analysis. |
