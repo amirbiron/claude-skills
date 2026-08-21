@@ -1,6 +1,6 @@
 # אינדקס סקילים
 
-34 סקילים ברמת חשבון, מצולמים מתוך `~/.claude/skills`.
+36 סקילים ברמת חשבון, מצולמים מתוך `~/.claude/skills`.
 נוצר על ידי `scripts/build-index.py`. אין לערוך ידנית.
 
 העמודה החשובה כאן היא התיאור. זה השדה היחיד שקובע אם סקיל נטען בכלל,
@@ -36,9 +36,11 @@
 | `skill-creator` | 18 | 33,351 B | Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better t… |
 | `skill-development` | 2 | 22,827 B | This skill should be used when the user wants to "create a skill", "add a skill to plugin", "write a new skill", "improve skill description", "organize skill content", or needs guidance on skill structure, progressive disclosure, or skill development best practices for Claude Code plugins. |
 | `skill-forge` | 1 | 12,759 B | יצירת סקיל אישי חדש או שיפור סקיל אישי קיים — ראיון קצר, בחירת ארכיטיפ, כתיבת SKILL.md, בדיקה ואריזה לקובץ שניתן להתקין ישירות מהנייד. Use this skill whenever the user asks to create, write, build, draft, scaffold or improve a skill, including phrasings like "מחולל סקילים", "תבנה לי סקיל", "צור סקיל… |
-| `source-driven-development` | 1 | 16,451 B | מבסס כל החלטת מימוש על מקור סמכותי, ומאמת אותה מול המציאות. Use when writing framework- or library-specific code where the API surface matters — FastAPI, python-telegram-bot, pymongo, MCP SDK, Meta Graph API, LLM SDKs. Use when the user asks for verified, documented or "correct" implementation, or w… |
+| `skill-router` | 3 | 2,558 B | "ALWAYS LOADED. Intelligent skill search router. When no installed skill matches the user's request, or when the user explicitly asks to find/search for a skill, run: skrt query 'user request'. Read the top result's SKILL.md and follow its instructions. 智能技能路由器，当找不到匹配技能时自动搜索。触发词: find skill, search… |
+| `source-driven-development` | 1 | 12,282 B | כותב קוד שהנכונות שלו מוגדרת מחוץ לריפו — חתימות, שמות שדות, קודי סטטוס, סמנטיקה של API — ומצטט מקור בר-בדיקה לכל החלטה. Use when writing a call whose correct form is defined by something you did not write: any library or SDK, an HTTP API, a protocol, a CLI flag, a config schema, a CI platform, a do… |
 | `tech-guide-design` | 1 | 12,668 B | Comprehensive design system for creating technical guides and documentation with modern dark-themed aesthetic. Use when creating technical tutorials, documentation pages, API guides, system architecture documents, or any Hebrew RTL technical content requiring professional styling with code blocks, t… |
 | `telegram-post` | 1 | 7,169 B | Post to Telegram channels and groups with markdown formatting, media support, and message options via Publora MCP |
 | `theme-factory` | 13 | 3,124 B | Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a new theme on-the-fly. |
+| `verify-against-reality` | 1 | 8,502 B | מוכיח שהקוד עובד מול המציאות ולא רק מול המסמך — הרצה כמו שהצרכן מריץ, אימות כתיבה בקריאה חוזרת של המצב, ובדיקה שמסוגלת להיכשל. Use whenever code writes, sends, deletes or otherwise changes state, and whenever you are about to tell the user that something works, is fixed, or is done. The verification… |
 | `web-artifacts-builder` | 5 | 3,087 B | Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for complex artifacts requiring state management, routing, or shadcn/ui components - not for simple single-file HTML/JSX artifacts. |
 | `xlsx` | 53 | 8,598 B | "Use this skill any time a spreadsheet file is the primary input or output. This means any task where the user wants to: open, read, edit, or fix an existing .xlsx, .xlsm, .xltx, .csv, or .tsv file (e.g., adding columns, computing formulas, formatting, charting, cleaning messy data); create a new sp… |
