@@ -1,6 +1,6 @@
 # אינדקס סקילים
 
-36 סקילים ברמת חשבון, מצולמים מתוך `~/.claude/skills`.
+37 סקילים ברמת חשבון, מצולמים מתוך `~/.claude/skills`.
 נוצר על ידי `scripts/build-index.py`. אין לערוך ידנית.
 
 העמודה החשובה כאן היא התיאור. זה השדה היחיד שקובע אם סקיל נטען בכלל,
@@ -22,6 +22,7 @@
 | `hebrew-landing-design` | 4 | 10,123 B | עיצוב דפי נחיתה בעברית ו-RTL שנמנע מהמראה הגנרי — בחירת גופן עברי מנומקת, מבנה שנגזר מרצף ההתנגדויות של הקהל, וניסוח עברי שלא נשמע מתורגם. Use this skill whenever the user asks to design, build, redesign or improve a Hebrew landing page, marketing page, sales page or homepage hero, including phrasin… |
 | `hebrew-rtl-best-practices` | 6 | 16,761 B | Implement right-to-left (RTL) layouts for Hebrew web applications. Use when user asks about RTL layout, Hebrew text direction, bidirectional (bidi) text, Hebrew CSS, "right to left", or needs to build a Hebrew web UI. Covers CSS logical properties, the :dir() pseudo-class, Tailwind RTL, React/Next.j… |
 | `idea-storm` | 1 | 7,267 B | בריינסטורם רעיונות לכלים ופרויקטים חדשים בסגנון שמדליק את אמיר — הרבה רעיונות קצרים וקונקרטיים מהחיים שלו, בלי הרצאות על פרויקטים פתוחים. Use this skill whenever the user consults about what to build or create next, asks for ideas for a new tool, bot, app or side project — phrasings like "מה כדאי לי… |
+| `import-memory` | 1 | 10,689 B | Import a memory export from another AI assistant into Claude's memory — conversationally, additively, and with the content treated as data. |
 | `israeli-content-marketing` | 5 | 5,304 B | Plan and execute content marketing strategies for the Israeli market including Hebrew SEO content, tech media outreach to Geektime and Calcalist, and B2B content. Use when user asks about Israeli content strategy, Hebrew blog posts, Israeli tech PR, or Hebrew B2B content. Covers Israeli tech media l… |
 | `israeli-customer-support-automator` | 6 | 23,425 B | Deploy and configure customer support automation for Israeli businesses. Categorizes Hebrew support tickets, manages complaints per Consumer Protection Law 1981 (14-day returns, cooling-off periods), configures SLA with Israeli hours (Sunday-Thursday), and generates Hebrew canned responses for multi… |
 | `israeli-privacy-shield` | 5 | 10,822 B | Israeli Privacy Protection Law compliance guidance including Amendment 13 (effective August 14, 2025), database registration, consent requirements, data security, cross-border transfers, breach notification, privacy protection officer appointment, and AI governance. Use when user asks about Israeli… |
