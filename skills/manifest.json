@@ -1,5 +1,5 @@
 {
-  "lastUpdated": 1787443741883,
+  "lastUpdated": 1787530151492,
   "skills": [
     {
       "skillId": "import-memory",
@@ -16,39 +16,11 @@
       "updatedAt": "2026-08-20T01:48:39.499345Z"
     },
     {
-      "skillId": "skill_01Fesd8SHRcPzUNaBtzevxyV",
-      "name": "emotional-sharing",
-      "description": "תגובה לשיתוף רגשי מתוך עמדה של חבר, לא של מבוגר אחראי. Use this skill whenever the user shares how he feels instead of asking a question — exhaustion, being awake too long, low energy, medication side effects, physical symptoms, burnout, frustration with a project, or a flat mood with no stated cause. Typical phrasings: \"אני מותש\", \"לא ישנתי\", \"אין לי כוח\", \"נמאס לי\", \"אני שחוק\", \"מרגיש אפטי\", \"הכדור עושה לי\", \"לא בא לי כלום\", \"אני כבר המון שעות ער\", \"סתם מרגיש על הפנים\". Trigger it especially when the sharing is embedded mid-task inside a technical conversation and he never asked for anything — that is the case most easily missed. Do NOT use when he asks a direct practical or factual question, even about health or sleep; answer the question. Do NOT use for explanatory documents or guides, which need explanatory-writing instead. This skill overrides detailed-responses — an emotional reply is short, in prose, and never comprehensive.",
-      "source": "custom",
-      "updatedAt": "2026-07-31T02:52:47.538934Z"
-    },
-    {
-      "skillId": "skill_01LwVtZnat4rsZKWuWDm1Z3g",
-      "name": "telegram-post",
-      "description": "Post to Telegram channels and groups with markdown formatting, media support, and message options via Publora MCP",
-      "source": "custom",
-      "updatedAt": "2026-08-12T05:05:58.050504Z"
-    },
-    {
-      "skillId": "skill_01QmUew3GYGH2CqmbRcyrSbD",
-      "name": "hebrew-rtl-best-practices",
-      "description": "Implement right-to-left (RTL) layouts for Hebrew web applications. Use when user asks about RTL layout, Hebrew text direction, bidirectional (bidi) text, Hebrew CSS, \"right to left\", or needs to build a Hebrew web UI. Covers CSS logical properties, the :dir() pseudo-class, Tailwind RTL, React/Next.js RTL setup, icon mirroring, Hebrew typography, and font selection. Do NOT use for Arabic RTL (similar but different typography) unless user explicitly asks for shared RTL patterns, or for native mobile RTL (React Native I18nManager, SwiftUI, Android) which is out of scope.",
-      "source": "custom",
-      "updatedAt": "2026-07-31T09:36:46.967614Z"
-    },
-    {
       "skillId": "skill_01RkNSPStgC5KrPy6HhVUGHj",
       "name": "source-driven-development",
       "description": "כותב קוד שהנכונות שלו מוגדרת מחוץ לריפו — חתימות, שמות שדות, קודי סטטוס, סמנטיקה של API — ומצטט מקור בר-בדיקה לכל החלטה. Use when writing a call whose correct form is defined by something you did not write: any library or SDK, an HTTP API, a protocol, a CLI flag, a config schema, a CI platform, a documentation toolchain. Use it also when the user asks for a verified, documented or \"correct\" implementation, or when a pattern is about to be copied across a project. Do NOT use for logic that is correct or wrong entirely within your own code: loops, conditions, data structures, business rules, renames, file moves — or when the user explicitly asked for speed over verification. This skill ends at the citation. Proving that the code actually runs is verify-against-reality, a separate skill that applies even when no external API is involved.",
       "source": "custom",
       "updatedAt": "2026-08-20T02:04:33.613896Z"
-    },
-    {
-      "skillId": "skill_01BuLUQGGcrhzAQPbWJ9xfsR",
-      "name": "skill-development",
-      "description": "This skill should be used when the user wants to \"create a skill\", \"add a skill to plugin\", \"write a new skill\", \"improve skill description\", \"organize skill content\", or needs guidance on skill structure, progressive disclosure, or skill development best practices for Claude Code plugins.",
-      "source": "custom",
-      "updatedAt": "2026-08-14T00:12:42.469279Z"
     },
     {
       "skillId": "skill_01P9NtATuFJ9x2bJd8bDEoD9",
@@ -58,39 +30,18 @@
       "updatedAt": "2026-08-06T21:20:43.356001Z"
     },
     {
+      "skillId": "skill_01BuLUQGGcrhzAQPbWJ9xfsR",
+      "name": "skill-development",
+      "description": "This skill should be used when the user wants to \"create a skill\", \"add a skill to plugin\", \"write a new skill\", \"improve skill description\", \"organize skill content\", or needs guidance on skill structure, progressive disclosure, or skill development best practices for Claude Code plugins.",
+      "source": "custom",
+      "updatedAt": "2026-08-14T00:12:42.469279Z"
+    },
+    {
       "skillId": "skill_014F4xHZyxgyZmgTooFpSxkn",
       "name": "logo-designer",
       "description": "Generate professional SVG logos from project context: 7 brand variants plus a showcase HTML page. Use for product marks, wordmarks, icons, and favicons. Don't use for raster-only logos, illustrations, or full brand guidelines.",
       "source": "custom",
       "updatedAt": "2026-08-14T21:15:08.439121Z"
-    },
-    {
-      "skillId": "skill_01DxiUew6srKVsqr37o5QLXb",
-      "name": "design-system-md",
-      "description": "סקיל ליצירת UI על בסיס DESIGN.md. מושך מערכות עיצוב של 58 מותגים (Apple, Stripe, Notion ועוד) באמצעות ה‑CLI‏ getdesign ומחיל אותן על הפרויקט. השתמש בו בכל יצירת ממשק — דף נחיתה, דשבורד, אפליקציית ווב — כדי להחיל עיצוב באיכות מותגית בבת אחת.",
-      "source": "custom",
-      "updatedAt": "2026-08-07T06:59:58.495500Z"
-    },
-    {
-      "skillId": "skill_01FZF842PJbMDdKRSeahkhNK",
-      "name": "click-to-convert-audit",
-      "description": "Audit a landing page to assess how likely it is to convert traffic from Google Ads, and produce a prioritized, evidence-backed list of fixes. Use this whenever the user shares a landing page URL and asks whether it will convert, whether it's ready to run paid traffic to, or about Quality Score, landing page experience, message match, scent, or the post-click experience. Trigger it even when the user just pastes a URL and asks \"will this convert?\", \"is this page good for Ads?\", \"why isn't my landing page converting?\", \"audit this page\", \"CRO audit\", \"am I wasting ad spend?\", or shares ad copy and keywords alongside a page. Prefer this skill over a generic critique whenever Google Ads, PPC, paid search, or conversion of paid traffic is in play.",
-      "source": "custom",
-      "updatedAt": "2026-08-07T05:56:47.867702Z"
-    },
-    {
-      "skillId": "skill_012koNHGzVuPQz8dnWdX3umL",
-      "name": "idea-storm",
-      "description": "בריינסטורם רעיונות לכלים ופרויקטים חדשים בסגנון שמדליק את אמיר — הרבה רעיונות קצרים וקונקרטיים מהחיים שלו, בלי הרצאות על פרויקטים פתוחים. Use this skill whenever the user consults about what to build or create next, asks for ideas for a new tool, bot, app or side project — phrasings like \"מה כדאי לי לבנות\", \"בוא נעשה בריינסטורם\", \"תן לי רעיונות\", \"מתלבט מה ליצור\", \"רעיון לפרויקט חדש\", \"מה אפשר לבנות עם\", \"משעמם לי בא לי לבנות משהו\". Trigger it even when the wondering appears mid technical conversation. Do NOT use for marketing or social post ideas, use marketing-content or israeli-social-content instead. Do NOT use for creating or improving skills, use skill-forge. Do NOT use once an idea was already chosen and the work moved to spec or implementation — that is regular development. Mood sharing without a build question belongs to emotional-sharing, not here.",
-      "source": "custom",
-      "updatedAt": "2026-08-04T22:57:07.100442Z"
-    },
-    {
-      "skillId": "skill_01FTn2HocmhGcz9WJtkTYKLm",
-      "name": "skill-corner-post",
-      "description": "כתיבת פוסט \"פינת הסקיל\" לערוץ הטלגרם AndroidAndAI בפורמט הקבוע - כותרת, הבעיה שהסקיל פותר, מתי להשתמש, מקור, גיטהאב והודעת ZIP נפרדת, ודחיפתו לערוץ דרך קונקטור Postproxy. השתמש בסקיל הזה תמיד כשהמשתמש מבקש \"תעשה פינת סקיל\", \"פוסט סקיל לערוץ\", \"תכתוב על הסקיל X לערוץ\", מזכיר \"פינת הסקיל\", או מעביר לינק/README/תיאור של סקיל ומבקש להפוך אותו לפוסט. השתמש בו גם אם המשתמש לא אמר במפורש \"פינת הסקיל\" אבל ברור שהוא רוצה להציג סקיל לקהל הערוץ.",
-      "source": "custom",
-      "updatedAt": "2026-08-13T10:46:21.977615Z"
     },
     {
       "skillId": "skill_01XBZkfLtJwoqXo5HoJ5E1pU",
@@ -107,46 +58,53 @@
       "updatedAt": "2026-08-20T17:26:57.702323Z"
     },
     {
+      "skillId": "skill_01FTn2HocmhGcz9WJtkTYKLm",
+      "name": "skill-corner-post",
+      "description": "כתיבת פוסט \"פינת הסקיל\" לערוץ הטלגרם AndroidAndAI בפורמט הקבוע - כותרת, הבעיה שהסקיל פותר, מתי להשתמש, מקור, גיטהאב והודעת ZIP נפרדת, ודחיפתו לערוץ דרך קונקטור Postproxy. השתמש בסקיל הזה תמיד כשהמשתמש מבקש \"תעשה פינת סקיל\", \"פוסט סקיל לערוץ\", \"תכתוב על הסקיל X לערוץ\", מזכיר \"פינת הסקיל\", או מעביר לינק/README/תיאור של סקיל ומבקש להפוך אותו לפוסט. השתמש בו גם אם המשתמש לא אמר במפורש \"פינת הסקיל\" אבל ברור שהוא רוצה להציג סקיל לקהל הערוץ.",
+      "source": "custom",
+      "updatedAt": "2026-08-13T10:46:21.977615Z"
+    },
+    {
+      "skillId": "skill_01FZF842PJbMDdKRSeahkhNK",
+      "name": "click-to-convert-audit",
+      "description": "Audit a landing page to assess how likely it is to convert traffic from Google Ads, and produce a prioritized, evidence-backed list of fixes. Use this whenever the user shares a landing page URL and asks whether it will convert, whether it's ready to run paid traffic to, or about Quality Score, landing page experience, message match, scent, or the post-click experience. Trigger it even when the user just pastes a URL and asks \"will this convert?\", \"is this page good for Ads?\", \"why isn't my landing page converting?\", \"audit this page\", \"CRO audit\", \"am I wasting ad spend?\", or shares ad copy and keywords alongside a page. Prefer this skill over a generic critique whenever Google Ads, PPC, paid search, or conversion of paid traffic is in play.",
+      "source": "custom",
+      "updatedAt": "2026-08-07T05:56:47.867702Z"
+    },
+    {
+      "skillId": "skill_01Fesd8SHRcPzUNaBtzevxyV",
+      "name": "emotional-sharing",
+      "description": "תגובה לשיתוף רגשי מתוך עמדה של חבר, לא של מבוגר אחראי. Use this skill whenever the user shares how he feels instead of asking a question — exhaustion, being awake too long, low energy, medication side effects, physical symptoms, burnout, frustration with a project, or a flat mood with no stated cause. Typical phrasings: \"אני מותש\", \"לא ישנתי\", \"אין לי כוח\", \"נמאס לי\", \"אני שחוק\", \"מרגיש אפטי\", \"הכדור עושה לי\", \"לא בא לי כלום\", \"אני כבר המון שעות ער\", \"סתם מרגיש על הפנים\". Trigger it especially when the sharing is embedded mid-task inside a technical conversation and he never asked for anything — that is the case most easily missed. Do NOT use when he asks a direct practical or factual question, even about health or sleep; answer the question. Do NOT use for explanatory documents or guides, which need explanatory-writing instead. This skill overrides detailed-responses — an emotional reply is short, in prose, and never comprehensive.",
+      "source": "custom",
+      "updatedAt": "2026-07-31T02:52:47.538934Z"
+    },
+    {
+      "skillId": "skill_01LwVtZnat4rsZKWuWDm1Z3g",
+      "name": "telegram-post",
+      "description": "Post to Telegram channels and groups with markdown formatting, media support, and message options via Publora MCP",
+      "source": "custom",
+      "updatedAt": "2026-08-12T05:05:58.050504Z"
+    },
+    {
+      "skillId": "skill_012koNHGzVuPQz8dnWdX3umL",
+      "name": "idea-storm",
+      "description": "בריינסטורם רעיונות לכלים ופרויקטים חדשים בסגנון שמדליק את אמיר — הרבה רעיונות קצרים וקונקרטיים מהחיים שלו, בלי הרצאות על פרויקטים פתוחים. Use this skill whenever the user consults about what to build or create next, asks for ideas for a new tool, bot, app or side project — phrasings like \"מה כדאי לי לבנות\", \"בוא נעשה בריינסטורם\", \"תן לי רעיונות\", \"מתלבט מה ליצור\", \"רעיון לפרויקט חדש\", \"מה אפשר לבנות עם\", \"משעמם לי בא לי לבנות משהו\". Trigger it even when the wondering appears mid technical conversation. Do NOT use for marketing or social post ideas, use marketing-content or israeli-social-content instead. Do NOT use for creating or improving skills, use skill-forge. Do NOT use once an idea was already chosen and the work moved to spec or implementation — that is regular development. Mood sharing without a build question belongs to emotional-sharing, not here.",
+      "source": "custom",
+      "updatedAt": "2026-08-04T22:57:07.100442Z"
+    },
+    {
+      "skillId": "skill_01DxiUew6srKVsqr37o5QLXb",
+      "name": "design-system-md",
+      "description": "סקיל ליצירת UI על בסיס DESIGN.md. מושך מערכות עיצוב של 58 מותגים (Apple, Stripe, Notion ועוד) באמצעות ה‑CLI‏ getdesign ומחיל אותן על הפרויקט. השתמש בו בכל יצירת ממשק — דף נחיתה, דשבורד, אפליקציית ווב — כדי להחיל עיצוב באיכות מותגית בבת אחת.",
+      "source": "custom",
+      "updatedAt": "2026-08-07T06:59:58.495500Z"
+    },
+    {
       "skillId": "skill_018u3LFFiXhr4bUSokT2MnoC",
       "name": "skill-forge",
       "description": "יצירת סקיל אישי חדש או שיפור סקיל אישי קיים — ראיון קצר, בחירת ארכיטיפ, כתיבת SKILL.md, בדיקה ואריזה לקובץ שניתן להתקין ישירות מהנייד. Use this skill whenever the user asks to create, write, build, draft, scaffold or improve a skill, including phrasings like \"מחולל סקילים\", \"תבנה לי סקיל\", \"צור סקיל\", \"בוא נהפוך את זה לסקיל\", \"תשפר לי את הסקיל\", \"turn this into a skill\", or \"make this repeatable\". Trigger it even when the user never says the word \"skill\" but describes wanting to reuse a process, a writing style, or a body of knowledge across future conversations, since capturing that as a skill is usually the right move. Do NOT use for skills intended for public submission to the skills-il directory at agentskills.co.il, which requires skills-il-skill-creator instead. Do NOT use for building MCP servers, which requires mcp-builder.",
       "source": "custom",
       "updatedAt": "2026-07-30T16:07:42.452769Z"
-    },
-    {
-      "skillId": "doc-coauthoring",
-      "name": "doc-coauthoring",
-      "description": "Guide users through a structured workflow for co-authoring documentation. Use when user wants to write documentation, proposals, technical specs, decision docs, or similar structured content. This workflow helps users efficiently transfer context, refine content through iteration, and verify the doc works for readers. Trigger when user mentions writing docs, creating proposals, drafting specs, or similar documentation tasks.",
-      "source": "anthropic-example",
-      "updatedAt": "2026-08-21T23:18:11.279997Z"
-    },
-    {
-      "skillId": "skill_01NzQuHwCSYDskPrkMP4j4gX",
-      "name": "hebrew-documents",
-      "description": "יצירת מסמכים בעברית עם RTL נכון. השתמש בסקיל זה כאשר יוצרים קובצי DOCX, PDF או PPTX בעברית.",
-      "source": "custom",
-      "updatedAt": "2026-03-22T06:09:24.202236Z"
-    },
-    {
-      "skillId": "skill_01MWYnmLska6oJUTP3GjuMaW",
-      "name": "explanatory-writing",
-      "description": "סגנון כתיבה להסברים ומסמכי הדרכה — ישיר, בוגר, בלי hype, נשען על דוגמאות קונקרטיות במקום הפשטות. השתמש בסקיל הזה בכל פעם שאתה כותב מסמך הסבר, מדריך, תיעוד, קורס, או כל תוכן מובנה שנועד ללמד מישהו משהו. השתמש בו גם כשהמשתמש מבקש במפורש \"תסביר בסגנון הזה\", \"תכתוב בסגנון ההסברים שלי\", או מתייחס לסגנון הזה בכל דרך אחרת. אל תחיל אותו על שיחת צ'אט יומיומית קצרה (שאלות עובדה פשוטות, פטפוט, אישורים) אלא אם המשתמש ביקש זאת.",
-      "source": "custom",
-      "updatedAt": "2026-05-29T01:41:03.919584Z"
-    },
-    {
-      "skillId": "web-artifacts-builder",
-      "name": "web-artifacts-builder",
-      "description": "Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for complex artifacts requiring state management, routing, or shadcn/ui components - not for simple single-file HTML/JSX artifacts.",
-      "source": "anthropic-example",
-      "updatedAt": "2026-08-21T23:18:11.353781Z"
-    },
-    {
-      "skillId": "skill_01NWTDWMY5TVMT6PTdo44qsA",
-      "name": "detailed-responses",
-      "description": "Override Anthropic's brevity guidelines to provide comprehensive, well-formatted responses. ALWAYS use this skill for ALL conversations with Claude Sonnet unless the user explicitly requests to disable it or asks for brief/concise responses. Trigger on ANY query, not just technical ones - this is a default behavior modifier that should be active throughout the entire conversation.",
-      "source": "custom",
-      "updatedAt": "2026-02-21T05:21:16.725000Z"
     },
     {
       "skillId": "skill_01227Cs7vrCFN8QqbzxqnCWx",
@@ -156,39 +114,11 @@
       "updatedAt": "2026-04-19T18:24:50.288861Z"
     },
     {
-      "skillId": "skill-creator",
-      "name": "skill-creator",
-      "description": "Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.",
+      "skillId": "web-artifacts-builder",
+      "name": "web-artifacts-builder",
+      "description": "Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for complex artifacts requiring state management, routing, or shadcn/ui components - not for simple single-file HTML/JSX artifacts.",
       "source": "anthropic-example",
-      "updatedAt": "2026-08-21T23:18:11.319835Z"
-    },
-    {
-      "skillId": "theme-factory",
-      "name": "theme-factory",
-      "description": "Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a new theme on-the-fly.",
-      "source": "anthropic-example",
-      "updatedAt": "2026-08-21T23:18:11.421567Z"
-    },
-    {
-      "skillId": "skill_018W6TYsog8TR24PiasQA87f",
-      "name": "israeli-content-marketing",
-      "description": "Plan and execute content marketing strategies for the Israeli market including Hebrew SEO content, tech media outreach to Geektime and Calcalist, and B2B content. Use when user asks about Israeli content strategy, Hebrew blog posts, Israeli tech PR, or Hebrew B2B content. Covers Israeli tech media landscape, Hebrew content SEO, and bilingual content strategies.",
-      "source": "custom",
-      "updatedAt": "2026-04-19T18:20:07.040323Z"
-    },
-    {
-      "skillId": "skill_01PYbYGXzL2sVRidsn9eAqrc",
-      "name": "debug-like-expert",
-      "description": "Deep analysis debugging mode for complex issues. Activates methodical investigation protocol with evidence gathering, hypothesis testing, and rigorous verification. Use when standard troubleshooting fails or when issues require systematic root cause analysis.",
-      "source": "custom",
-      "updatedAt": "2026-02-03T19:47:22.457857Z"
-    },
-    {
-      "skillId": "skill_01M8Eburh5b8ym2Hjs1CbFRz",
-      "name": "marketing-content",
-      "description": "כתיבת תוכן שיווקי ומדיה חברתית בעברית ובאנגלית. השתמש בסקיל זה תמיד כאשר המשתמש מבקש ליצור או לשפר פוסטים ל-LinkedIn, קפשנים ל-Instagram/Facebook, ניוזלטרים, עמודי מכירה, landing pages, מיילי קמפיין, תוכן לאתר, מודעות, או כל תוכן שיווקי אחר. מתאים גם לשיפור טיוטות קיימות, יצירת וריאציות A/B, וניסוח CTA. גם אם המשתמש לא אמר במפורש \"תוכן שיווקי\" — אם יש כוונה שיווקית, השתמש בסקיל זה.",
-      "source": "custom",
-      "updatedAt": "2026-04-10T17:05:57.405172Z"
+      "updatedAt": "2026-08-21T23:18:11.353781Z"
     },
     {
       "skillId": "skill_01FC84MJDaYVP6cA4WqKmiDk",
@@ -198,11 +128,60 @@
       "updatedAt": "2026-04-19T17:57:26.780895Z"
     },
     {
+      "skillId": "skill_01QmUew3GYGH2CqmbRcyrSbD",
+      "name": "hebrew-rtl-best-practices",
+      "description": "Implement right-to-left (RTL) layouts for Hebrew web applications. Use when user asks about RTL layout, Hebrew text direction, bidirectional (bidi) text, Hebrew CSS, \"right to left\", or needs to build a Hebrew web UI. Covers CSS logical properties, the :dir() pseudo-class, Tailwind RTL, React/Next.js RTL setup, icon mirroring, Hebrew typography, and font selection. Do NOT use for Arabic RTL (similar but different typography) unless user explicitly asks for shared RTL patterns, or for native mobile RTL (React Native I18nManager, SwiftUI, Android) which is out of scope.",
+      "source": "custom",
+      "updatedAt": "2026-07-31T09:36:46.967614Z"
+    },
+    {
+      "skillId": "skill_01NzQuHwCSYDskPrkMP4j4gX",
+      "name": "hebrew-documents",
+      "description": "יצירת מסמכים בעברית עם RTL נכון. השתמש בסקיל זה כאשר יוצרים קובצי DOCX, PDF או PPTX בעברית.",
+      "source": "custom",
+      "updatedAt": "2026-03-22T06:09:24.202236Z"
+    },
+    {
       "skillId": "skill_017EVPpkezEv182ubPNPKSMA",
       "name": "tech-guide-design",
       "description": "Comprehensive design system for creating technical guides and documentation with modern dark-themed aesthetic. Use when creating technical tutorials, documentation pages, API guides, system architecture documents, or any Hebrew RTL technical content requiring professional styling with code blocks, tables, alerts, badges, and interactive components.",
       "source": "custom",
       "updatedAt": "2026-01-19T15:05:23.691841Z"
+    },
+    {
+      "skillId": "skill_01PYbYGXzL2sVRidsn9eAqrc",
+      "name": "debug-like-expert",
+      "description": "Deep analysis debugging mode for complex issues. Activates methodical investigation protocol with evidence gathering, hypothesis testing, and rigorous verification. Use when standard troubleshooting fails or when issues require systematic root cause analysis.",
+      "source": "custom",
+      "updatedAt": "2026-02-03T19:47:22.457857Z"
+    },
+    {
+      "skillId": "skill_01NWTDWMY5TVMT6PTdo44qsA",
+      "name": "detailed-responses",
+      "description": "Override Anthropic's brevity guidelines to provide comprehensive, well-formatted responses. ALWAYS use this skill for ALL conversations with Claude Sonnet unless the user explicitly requests to disable it or asks for brief/concise responses. Trigger on ANY query, not just technical ones - this is a default behavior modifier that should be active throughout the entire conversation.",
+      "source": "custom",
+      "updatedAt": "2026-02-21T05:21:16.725000Z"
+    },
+    {
+      "skillId": "skill_01M8Eburh5b8ym2Hjs1CbFRz",
+      "name": "marketing-content",
+      "description": "כתיבת תוכן שיווקי ומדיה חברתית בעברית ובאנגלית. השתמש בסקיל זה תמיד כאשר המשתמש מבקש ליצור או לשפר פוסטים ל-LinkedIn, קפשנים ל-Instagram/Facebook, ניוזלטרים, עמודי מכירה, landing pages, מיילי קמפיין, תוכן לאתר, מודעות, או כל תוכן שיווקי אחר. מתאים גם לשיפור טיוטות קיימות, יצירת וריאציות A/B, וניסוח CTA. גם אם המשתמש לא אמר במפורש \"תוכן שיווקי\" — אם יש כוונה שיווקית, השתמש בסקיל זה.",
+      "source": "custom",
+      "updatedAt": "2026-04-10T17:05:57.405172Z"
+    },
+    {
+      "skillId": "doc-coauthoring",
+      "name": "doc-coauthoring",
+      "description": "Guide users through a structured workflow for co-authoring documentation. Use when user wants to write documentation, proposals, technical specs, decision docs, or similar structured content. This workflow helps users efficiently transfer context, refine content through iteration, and verify the doc works for readers. Trigger when user mentions writing docs, creating proposals, drafting specs, or similar documentation tasks.",
+      "source": "anthropic-example",
+      "updatedAt": "2026-08-21T23:18:11.279997Z"
+    },
+    {
+      "skillId": "skill_018W6TYsog8TR24PiasQA87f",
+      "name": "israeli-content-marketing",
+      "description": "Plan and execute content marketing strategies for the Israeli market including Hebrew SEO content, tech media outreach to Geektime and Calcalist, and B2B content. Use when user asks about Israeli content strategy, Hebrew blog posts, Israeli tech PR, or Hebrew B2B content. Covers Israeli tech media landscape, Hebrew content SEO, and bilingual content strategies.",
+      "source": "custom",
+      "updatedAt": "2026-04-19T18:20:07.040323Z"
     },
     {
       "skillId": "brand-guidelines",
@@ -212,11 +191,18 @@
       "updatedAt": "2026-08-21T23:18:11.361182Z"
     },
     {
-      "skillId": "skill_01UGDGDchaTQ3hTiXiSU9YJr",
-      "name": "israeli-social-content",
-      "description": "Create social media content optimized for Israeli audiences across Facebook, Instagram, TikTok, and LinkedIn. Use when user asks about Israeli social media strategy, Hebrew social posts, posting schedules for Israel, Hebrew hashtags, or Israeli Facebook group marketing. Covers platform-specific best practices, Israeli cultural references, and Hebrew copywriting for social. Do NOT use for paid ad campaigns, influencer outreach, or SEO content writing.",
-      "source": "custom",
-      "updatedAt": "2026-04-19T18:12:36.073370Z"
+      "skillId": "theme-factory",
+      "name": "theme-factory",
+      "description": "Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a new theme on-the-fly.",
+      "source": "anthropic-example",
+      "updatedAt": "2026-08-21T23:18:11.421567Z"
+    },
+    {
+      "skillId": "skill-creator",
+      "name": "skill-creator",
+      "description": "Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.",
+      "source": "anthropic-example",
+      "updatedAt": "2026-08-21T23:18:11.319835Z"
     },
     {
       "skillId": "mcp-builder",
@@ -226,11 +212,25 @@
       "updatedAt": "2026-08-21T23:18:11.387797Z"
     },
     {
+      "skillId": "skill_01UGDGDchaTQ3hTiXiSU9YJr",
+      "name": "israeli-social-content",
+      "description": "Create social media content optimized for Israeli audiences across Facebook, Instagram, TikTok, and LinkedIn. Use when user asks about Israeli social media strategy, Hebrew social posts, posting schedules for Israel, Hebrew hashtags, or Israeli Facebook group marketing. Covers platform-specific best practices, Israeli cultural references, and Hebrew copywriting for social. Do NOT use for paid ad campaigns, influencer outreach, or SEO content writing.",
+      "source": "custom",
+      "updatedAt": "2026-04-19T18:12:36.073370Z"
+    },
+    {
       "skillId": "pdf",
       "name": "pdf",
       "description": "Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, extracting images, and OCR on scanned PDFs to make them searchable. If the user mentions a .pdf file or asks to produce one, use this skill.",
       "source": "anthropic",
       "updatedAt": "2026-07-10T19:23:15.432550Z"
+    },
+    {
+      "skillId": "xlsx",
+      "name": "xlsx",
+      "description": "Use this skill any time a spreadsheet file is the primary input or output. This means any task where the user wants to: open, read, edit, or fix an existing .xlsx, .xlsm, .xltx, .csv, or .tsv file (e.g., adding columns, computing formulas, formatting, charting, cleaning messy data); create a new spreadsheet from scratch or from other data sources; or convert between tabular file formats. Trigger especially when the user references a spreadsheet file by name or path — even casually (like \"the xlsx in my downloads\") — and wants something done to it or produced from it. Also trigger for cleaning or restructuring messy tabular data files (malformed rows, misplaced headers, junk data) into proper spreadsheets. The deliverable must be a spreadsheet file. Do NOT trigger when the primary deliverable is a Word document, HTML report, standalone Python script, database pipeline, or Google Sheets API integration, even if tabular data is involved.",
+      "source": "anthropic",
+      "updatedAt": "2026-08-03T21:01:25.792740Z"
     },
     {
       "skillId": "pptx",
@@ -247,11 +247,11 @@
       "updatedAt": "2026-08-03T21:01:25.747439Z"
     },
     {
-      "skillId": "xlsx",
-      "name": "xlsx",
-      "description": "Use this skill any time a spreadsheet file is the primary input or output. This means any task where the user wants to: open, read, edit, or fix an existing .xlsx, .xlsm, .xltx, .csv, or .tsv file (e.g., adding columns, computing formulas, formatting, charting, cleaning messy data); create a new spreadsheet from scratch or from other data sources; or convert between tabular file formats. Trigger especially when the user references a spreadsheet file by name or path — even casually (like \"the xlsx in my downloads\") — and wants something done to it or produced from it. Also trigger for cleaning or restructuring messy tabular data files (malformed rows, misplaced headers, junk data) into proper spreadsheets. The deliverable must be a spreadsheet file. Do NOT trigger when the primary deliverable is a Word document, HTML report, standalone Python script, database pipeline, or Google Sheets API integration, even if tabular data is involved.",
-      "source": "anthropic",
-      "updatedAt": "2026-08-03T21:01:25.792740Z"
+      "skillId": "skill_01MWYnmLska6oJUTP3GjuMaW",
+      "name": "explanatory-writing",
+      "description": "סגנון כתיבה להסברים ומסמכי הדרכה — ישיר, בוגר, בלי hype, נשען על דוגמאות קונקרטיות במקום הפשטות. השתמש בסקיל הזה בכל פעם שאתה כותב מסמך הסבר, מדריך, תיעוד, קורס, או כל תוכן מובנה שנועד ללמד מישהו משהו. השתמש בו גם כשהמשתמש מבקש במפורש \"תסביר בסגנון הזה\", \"תכתוב בסגנון ההסברים שלי\", או מתייחס לסגנון הזה בכל דרך אחרת. אל תחיל אותו על שיחת צ'אט יומיומית קצרה (שאלות עובדה פשוטות, פטפוט, אישורים) אלא אם המשתמש ביקש זאת.",
+      "source": "custom",
+      "updatedAt": "2026-05-29T01:41:03.919584Z"
     }
   ]
 }
