@@ -1,6 +1,6 @@
 # אינדקס סקילים
 
-37 סקילים ברמת חשבון, מצולמים מתוך `~/.claude/skills`.
+38 סקילים ברמת חשבון, מצולמים מתוך `~/.claude/skills`.
 נוצר על ידי `scripts/build-index.py`. אין לערוך ידנית.
 
 העמודה החשובה כאן היא התיאור. זה השדה היחיד שקובע אם סקיל נטען בכלל,
@@ -9,6 +9,7 @@
 | סקיל | קבצים | גודל SKILL.md | תיאור |
 | --- | --- | --- | --- |
 | `brand-guidelines` | 2 | 2,235 B | Applies Anthropic's official brand colors and typography to any sort of artifact that may benefit from having Anthropic's look-and-feel. Use it when brand colors or style guidelines, visual formatting, or company design standards apply. |
+| `browser-measurement` | 4 | 8,360 B | מודד שינוי פרונטאנד מול דפדפן אמיתי במקום להסיק מהקוד — שרת בדיקה מקומי, מדידה ב-Playwright/CDP, ריצת בקרה על הקוד שלפני התיקון, ומוטציות שמוכיחות שהבדיקה מסוגלת להיכשל. Use whenever a change touches CSS, JS, a template, or anything a browser renders or consumes, and whenever you are about to report that a UI fix works… |
 | `click-to-convert-audit` | 3 | 8,212 B | Audit a landing page to assess how likely it is to convert traffic from Google Ads, and produce a prioritized, evidence-backed list of fixes. Use this whenever the user shares a landing page URL and asks whether it will convert, whether it's ready to run paid traffic to, or about Quality Score, land… |
 | `debug-like-expert` | 1 | 11,213 B | Deep analysis debugging mode for complex issues. Activates methodical investigation protocol with evidence gathering, hypothesis testing, and rigorous verification. Use when standard troubleshooting fails or when issues require systematic root cause analysis. |
 | `design-system-md` | 2 | 5,208 B | סקיל ליצירת UI על בסיס DESIGN.md. מושך מערכות עיצוב של 58 מותגים (Apple, Stripe, Notion ועוד) באמצעות ה‑CLI‏ getdesign ומחיל אותן על הפרויקט. השתמש בו בכל יצירת ממשק — דף נחיתה, דשבורד, אפליקציית ווב — כדי להחיל עיצוב באיכות מותגית בבת אחת. |
