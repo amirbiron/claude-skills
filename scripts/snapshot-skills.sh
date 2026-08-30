@@ -93,9 +93,16 @@ fi
 # pinned here goes stale exactly when the one above does. Skill directories are
 # pruned so a manifest.json bundled inside a skill is never mistaken for the
 # account's own.
-manifest="$(find "$SRC" \
+#
+# The first line is taken with a parameter expansion rather than `| head -1`.
+# Under `set -o pipefail` a head that exits early can SIGPIPE the writer once
+# its output outgrows the pipe buffer, and the 141 propagates out of the
+# command substitution and kills the whole run. Sorting to completion first
+# and slicing the string afterwards has no early reader to trip over.
+manifests="$(find "$SRC" \
   \( -type d -exec test -e '{}/SKILL.md' ';' -prune \) -o \
-  \( -name manifest.json -print \) | sort | head -1)"
+  \( -name manifest.json -print \) | sort)"
+manifest="${manifests%%$'\n'*}"
 if [ -n "$manifest" ]; then
   cp "$manifest" "$STAGE/manifest.json"
 elif [ -e "$DEST/manifest.json" ] && [ "${FORCE:-}" != "1" ]; then
