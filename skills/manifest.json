@@ -1,5 +1,5 @@
 {
-  "lastUpdated": 1788127343230,
+  "lastUpdated": 1788133150484,
   "skills": [
     {
       "skillId": "import-memory",
@@ -14,13 +14,6 @@
       "description": "This skill should be used when the user wants to \"create a skill\", \"add a skill to plugin\", \"write a new skill\", \"improve skill description\", \"organize skill content\", or needs guidance on skill structure, progressive disclosure, or skill development best practices for Claude Code plugins.",
       "source": "custom",
       "updatedAt": "2026-08-14T00:12:42.469279Z"
-    },
-    {
-      "skillId": "skill_01SuG3xdY8nxG7gcUNcHgb1C",
-      "name": "browser-measurement",
-      "description": "מודד שינוי פרונטאנד מול דפדפן אמיתי במקום להסיק מהקוד — שרת בדיקה מקומי, מדידה ב-Playwright/CDP, ריצת בקרה על הקוד שלפני התיקון, ומוטציות שמוכיחות שהבדיקה מסוגלת להיכשל. Use whenever a change touches CSS, JS, a template, or anything a browser renders or consumes, and whenever you are about to report that a UI fix works. Hebrew phrasings that should trigger it - תבדוק בדפדפן, תמדוד את זה, תוכיח שזה עובד, תריץ ותראה, תבדוק שלא נשבר, למה זה לא עובד בנייד. Trigger it on your own initiative before claiming a frontend bug is fixed, even without being asked. Do NOT use for backend logic with no browser consumer, for pure refactors, or for picking an external API signature - that is source-driven-development. Use run to get the app started; this skill is the measurement discipline once it is up. It is the concrete browser protocol under verify-against-reality, not a replacement for it.",
-      "source": "custom",
-      "updatedAt": "2026-08-30T21:48:45.995605Z"
     },
     {
       "skillId": "skill_01FTn2HocmhGcz9WJtkTYKLm",
@@ -259,6 +252,13 @@
       "description": "Use this skill any time a .pptx or .potx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations as PowerPoint (.pptx) files; reading, parsing, or extracting text from any .pptx or .potx file (even if the extracted content will be used elsewhere, like in an email, summary, or creating a different type of slide deck); editing, modifying, or updating existing presentations; combining or splitting slide files; working with templates (.potx), layouts, speaker notes, or comments. Trigger whenever the user asks for a PowerPoint or .pptx file, or references a .pptx or .potx filename, regardless of what they plan to do with the content afterward. However, when the user asks for a deck, slides, a slide deck, or a presentation without naming a file format, default to using a dedicated slide-deck artifact type or a separate slides skill if this session offers one; otherwise, use this skill.",
       "source": "anthropic",
       "updatedAt": "2026-08-28T02:00:39.535636Z"
+    },
+    {
+      "skillId": "skill_018zEBfAzjtJSGZm6bdNVwok",
+      "name": "browser-measurement",
+      "description": "מודד שינוי פרונטאנד מול דפדפן אמיתי במקום להסיק מהקוד — שרת בדיקה מקומי, מדידה ב-Playwright/CDP, ריצת בקרה על הקוד שלפני התיקון, ומוטציות שמוכיחות שהבדיקה מסוגלת להיכשל. Use whenever a change touches CSS, JS, a template, or anything a browser renders or consumes, and whenever you are about to report that a UI fix works. Hebrew phrasings that should trigger it - תבדוק בדפדפן, תמדוד את זה, תוכיח שזה עובד, תריץ ותראה, תבדוק שלא נשבר, למה זה לא עובד בנייד. Trigger it on your own initiative before claiming a frontend bug is fixed, even without being asked. Do NOT use for backend logic with no browser consumer, for pure refactors, or for picking an external API signature - that is source-driven-development. Use run to get the app started; this skill is the measurement discipline once it is up. It is the concrete browser protocol under verify-against-reality, not a replacement for it.",
+      "source": "custom",
+      "updatedAt": "2026-08-30T23:38:56.303822Z"
     }
   ]
 }

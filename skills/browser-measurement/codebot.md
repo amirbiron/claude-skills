@@ -6,12 +6,16 @@
 
 שרת Flask אמיתי מול מונגו אמיתי, עם ראוט התחברות שנוסף רק לבדיקה. הוא מייבא את `webapp.app` כמו שהוא — לא מוק.
 
+**השמה מפורשת ל-`MONGODB_URL`, ולא `setdefault`.** ההארנס הזה **כותב** — הוא מאפס פתקים ויוצר מצב בדיקה — ו-`setdefault` משמר ערך קיים בסביבה. נמדד: עם `MONGODB_URL` שמצביע על בסיס נתונים אמיתי, `setdefault` השאיר אותו, ו-`database/manager.py` מתחבר לפי מה שיש ב-`os.environ` בזמן הריצה. כלומר ההארנס היה כותב נתוני בדיקה לפרודקשן. אותו נימוק חל על `DISABLE_DB`. ל-`BOT_TOKEN` ו-`SECRET_KEY` זה פחות קריטי, אבל אין סיבה שיהיו שונים.
+
+הנתיב ב-`sys.path.insert` הוא של הקלון בסביבה הזו — החליפו אותו בנתיב הקלון המקומי שלכם.
+
 ```python
 import os
-os.environ.setdefault("MONGODB_URL", "mongodb://127.0.0.1:27114/code_keeper_bot")
-os.environ.setdefault("BOT_TOKEN", "dummy")
-os.environ.setdefault("SECRET_KEY", "test-secret")
-os.environ.setdefault("DISABLE_DB", "0")
+os.environ["MONGODB_URL"] = "mongodb://127.0.0.1:27114/code_keeper_bot"
+os.environ["BOT_TOKEN"] = "dummy"
+os.environ["SECRET_KEY"] = "test-secret"
+os.environ["DISABLE_DB"] = "0"
 import sys; sys.path.insert(0, "/home/user/CodeBot")
 
 UID = 4242
