@@ -53,12 +53,19 @@ trap cleanup EXIT
 # Keyed on where SKILL.md actually is, rather than copying $SRC wholesale.
 #
 # Claude materialises the account's skills under $SRC, but not at a fixed
-# depth: they used to sit directly inside it, and now most arrive one level
-# down in synced/ while a few stay at the top. A plain copy mirrors that
-# nesting into skills/, where both builders look for SKILL.md exactly one level
-# down — so they would see one skill instead of thirty-two, and because this is
-# a mirror rather than a merge, committing that would delete all the rest. It
-# fails silently too: every command still exits 0.
+# depth: they used to sit directly inside it, then most moved one level down
+# into synced/ while a few stayed at the top, and now the synced/ ones sit
+# another level down again inside a per-account bucket directory. A plain copy
+# mirrors that nesting into skills/, where both builders look for SKILL.md
+# exactly one level down — so they would see one skill instead of thirty-eight,
+# and because this is a mirror rather than a merge, committing that would
+# delete all the rest. It fails silently too: every command still exits 0.
+#
+# So the search is depth-agnostic rather than pinned to whatever the layout
+# happens to be this month: any directory holding a SKILL.md is a skill, at
+# whatever depth it turns up. Pinning it is what broke the last two times.
+# Pruning at each match keeps a SKILL.md bundled inside a skill's own reference
+# material from being mistaken for a skill in its own right.
 #
 # Flattening by basename keeps skills/ in the shape the rest of the repo
 # expects, and leaves it working whichever depth the next layout change picks.
@@ -71,7 +78,7 @@ while IFS= read -r skill; do
   fi
   cp -r "$skill" "$STAGE/$name"
   found=$((found + 1))
-done < <(find "$SRC" -mindepth 2 -maxdepth 3 -name SKILL.md -printf '%h\n' | sort)
+done < <(find "$SRC" -mindepth 1 -type d -exec test -e '{}/SKILL.md' ';' -print -prune | sort)
 
 if [ "$found" -eq 0 ]; then
   echo "No SKILL.md found anywhere under $SRC." >&2
@@ -80,8 +87,25 @@ fi
 
 # Carried alongside the skills because the previous snapshot has one, and a
 # mirror that drops a file it used to hold is not mirroring.
-manifest="$(find "$SRC" -maxdepth 2 -name manifest.json | head -1)"
-[ -n "$manifest" ] && cp "$manifest" "$STAGE/manifest.json"
+#
+# Depth-agnostic for the same reason the skill search above is: the manifest
+# travels with the skills, so every layout change moves it too, and a depth
+# pinned here goes stale exactly when the one above does. Skill directories are
+# pruned so a manifest.json bundled inside a skill is never mistaken for the
+# account's own.
+manifest="$(find "$SRC" \
+  \( -type d -exec test -e '{}/SKILL.md' ';' -prune \) -o \
+  \( -name manifest.json -print \) | sort | head -1)"
+if [ -n "$manifest" ]; then
+  cp "$manifest" "$STAGE/manifest.json"
+elif [ -e "$DEST/manifest.json" ] && [ "${FORCE:-}" != "1" ]; then
+  # Losing a file the snapshot already holds is the same class of failure as
+  # the collapsing skill count below — the layout moved and the search missed
+  # it — and it is quieter, so it gets the same refusal rather than a shrug.
+  echo "Refusing: skills/manifest.json exists but no manifest.json was found under $SRC." >&2
+  echo "Check the layout under $SRC, or re-run with FORCE=1 if that is real." >&2
+  exit 1
+fi
 
 # A snapshot that collapses is the signature of the source layout moving
 # again, not of thirty skills being deleted from the account on one afternoon.
