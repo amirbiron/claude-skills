@@ -1,6 +1,6 @@
 # אינדקס סקילים
 
-37 סקילים ברמת חשבון, מצולמים מתוך `~/.claude/skills`.
+38 סקילים ברמת חשבון, מצולמים מתוך `~/.claude/skills`.
 נוצר על ידי `scripts/build-index.py`. אין לערוך ידנית.
 
 העמודה החשובה כאן היא התיאור. זה השדה היחיד שקובע אם סקיל נטען בכלל,
@@ -9,6 +9,7 @@
 | סקיל | קבצים | גודל SKILL.md | תיאור |
 | --- | --- | --- | --- |
 | `brand-guidelines` | 2 | 2,235 B | Applies Anthropic's official brand colors and typography to any sort of artifact that may benefit from having Anthropic's look-and-feel. Use it when brand colors or style guidelines, visual formatting, or company design standards apply. |
+| `browser-measurement` | 4 | 12,676 B | מודד שינוי פרונטאנד מול דפדפן אמיתי במקום להסיק מהקוד — שרת בדיקה מקומי, מדידה ב-Playwright/CDP, ריצת בקרה על הקוד שלפני התיקון, ומוטציות שמוכיחות שהבדיקה מסוגלת להיכשל. Use whenever a change touches CSS, JS, a template, or anything a browser renders or consumes, and whenever you are about to report… |
 | `click-to-convert-audit` | 3 | 8,212 B | Audit a landing page to assess how likely it is to convert traffic from Google Ads, and produce a prioritized, evidence-backed list of fixes. Use this whenever the user shares a landing page URL and asks whether it will convert, whether it's ready to run paid traffic to, or about Quality Score, land… |
 | `debug-like-expert` | 1 | 11,213 B | Deep analysis debugging mode for complex issues. Activates methodical investigation protocol with evidence gathering, hypothesis testing, and rigorous verification. Use when standard troubleshooting fails or when issues require systematic root cause analysis. |
 | `design-system-md` | 2 | 5,208 B | סקיל ליצירת UI על בסיס DESIGN.md. מושך מערכות עיצוב של 58 מותגים (Apple, Stripe, Notion ועוד) באמצעות ה‑CLI‏ getdesign ומחיל אותן על הפרויקט. השתמש בו בכל יצירת ממשק — דף נחיתה, דשבורד, אפליקציית ווב — כדי להחיל עיצוב באיכות מותגית בבת אחת. |
@@ -31,7 +32,7 @@
 | `marketing-content` | 3 | 5,623 B | כתיבת תוכן שיווקי ומדיה חברתית בעברית ובאנגלית. השתמש בסקיל זה תמיד כאשר המשתמש מבקש ליצור או לשפר פוסטים ל-LinkedIn, קפשנים ל-Instagram/Facebook, ניוזלטרים, עמודי מכירה, landing pages, מיילי קמפיין, תוכן לאתר, מודעות, או כל תוכן שיווקי אחר. מתאים גם לשיפור טיוטות קיימות, יצירת וריאציות A/B, וניסוח… |
 | `mcp-builder` | 10 | 9,092 B | Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK). |
 | `pdf` | 12 | 8,072 B | Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, ext… |
-| `pptx` | 56 | 20,983 B | "Use this skill any time a .pptx or .potx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from any .pptx or .potx file (even if the extracted content will be used elsewhere, like in an e… |
+| `pptx` | 56 | 21,574 B | "Use this skill any time a .pptx or .potx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations as PowerPoint (.pptx) files; reading, parsing, or extracting text from any .pptx or .potx file (even if the extracted content will be… |
 | `session-start-hook` | 1 | 4,931 B | Creating and developing startup hooks for Claude Code on the web. Use when the user wants to set up a repository for Claude Code on the web, create a SessionStart hook to ensure their project can run tests and linters during web sessions. |
 | `skill-corner-post` | 1 | 7,872 B | כתיבת פוסט "פינת הסקיל" לערוץ הטלגרם AndroidAndAI בפורמט הקבוע - כותרת, הבעיה שהסקיל פותר, מתי להשתמש, מקור, גיטהאב והודעת ZIP נפרדת, ודחיפתו לערוץ דרך קונקטור Postproxy. השתמש בסקיל הזה תמיד כשהמשתמש מבקש "תעשה פינת סקיל", "פוסט סקיל לערוץ", "תכתוב על הסקיל X לערוץ", מזכיר "פינת הסקיל", או מעביר לי… |
 | `skill-creator` | 18 | 33,351 B | Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better t… |
