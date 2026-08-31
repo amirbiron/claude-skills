@@ -1,5 +1,5 @@
 {
-  "lastUpdated": 1788133150484,
+  "lastUpdated": 1788135550294,
   "skills": [
     {
       "skillId": "import-memory",
@@ -254,11 +254,11 @@
       "updatedAt": "2026-08-28T02:00:39.535636Z"
     },
     {
-      "skillId": "skill_018zEBfAzjtJSGZm6bdNVwok",
+      "skillId": "skill_01BgxxGvB7DA1QxLGyfZwtN7",
       "name": "browser-measurement",
       "description": "מודד שינוי פרונטאנד מול דפדפן אמיתי במקום להסיק מהקוד — שרת בדיקה מקומי, מדידה ב-Playwright/CDP, ריצת בקרה על הקוד שלפני התיקון, ומוטציות שמוכיחות שהבדיקה מסוגלת להיכשל. Use whenever a change touches CSS, JS, a template, or anything a browser renders or consumes, and whenever you are about to report that a UI fix works. Hebrew phrasings that should trigger it - תבדוק בדפדפן, תמדוד את זה, תוכיח שזה עובד, תריץ ותראה, תבדוק שלא נשבר, למה זה לא עובד בנייד. Trigger it on your own initiative before claiming a frontend bug is fixed, even without being asked. Do NOT use for backend logic with no browser consumer, for pure refactors, or for picking an external API signature - that is source-driven-development. Use run to get the app started; this skill is the measurement discipline once it is up. It is the concrete browser protocol under verify-against-reality, not a replacement for it.",
       "source": "custom",
-      "updatedAt": "2026-08-30T23:38:56.303822Z"
+      "updatedAt": "2026-08-31T00:09:42.033698Z"
     }
   ]
 }
