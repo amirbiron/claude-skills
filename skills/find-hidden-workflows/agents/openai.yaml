@@ -1,0 +1,13 @@
+interface:
+  display_name: Find Hidden Workflows
+  short_description: Find repeated work worth turning into skills
+  default_prompt: Use $find-hidden-workflows to analyse my accessible history and
+    identify five recurring workflows worth turning into skills.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  allow_implicit_invocation: false

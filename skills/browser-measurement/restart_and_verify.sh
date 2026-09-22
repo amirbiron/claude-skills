@@ -62,7 +62,8 @@ sleep 1
 
 # mktemp, not a fixed /tmp path: a fixed name can follow a pre-existing
 # symlink, and concurrent runs would overwrite each other's output.
-LOG="$(mktemp -t restart_and_verify.XXXXXX)"
+LOG="$(mktemp -t restart_and_verify.XXXXXX)" || {
+  echo "FAIL: could not create a log file - is TMPDIR writable?"; exit 1; }
 
 # setsid so the server survives this shell, and </dev/null so it never
 # blocks on stdin.

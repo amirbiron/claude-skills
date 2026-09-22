@@ -1,569 +1,222 @@
 ---
 name: tech-guide-design
-description: Comprehensive design system for creating technical guides and documentation with modern dark-themed aesthetic. Use when creating technical tutorials, documentation pages, API guides, system architecture documents, or any Hebrew RTL technical content requiring professional styling with code blocks, tables, alerts, badges, and interactive components.
+description: >-
+  מערכת עיצוב לארטיפקטים של הסבר בעברית RTL — מדריכים, תיעוד, סיכומים, דוחות סריקה, ניתוחים והשוואות — בעיצוב כהה, שקט ומותאם לקריאה בנייד. Use this skill whenever the deliverable is a standalone HTML explanation artifact the user will read, keep or share, including phrasings like "תבנה לי מדריך", "תעשה דף הסבר", "תסכם את זה למסמך", "תעשה מזה ארטיפקט", "דוח", "תיעוד", "מסמך אפיון", "README כדף". Trigger it also when you decide on your own initiative that an explanation earned an artifact instead of a chat answer. It covers non-technical explanations too, not only code and API docs. Do NOT use for marketing, sales or landing pages, use hebrew-landing-design instead. Do NOT use for the prose voice of an explanation, which is explanatory-writing — that skill decides how the sentences sound, this one decides how the page looks, and they are meant to run together. Do NOT use for DOCX or PDF deliverables, use hebrew-documents.
+license: MIT
+compatibility: אינו דורש רשת. מיועד לארטיפקטים ב-claude.ai, כולל קריאה מהנייד.
 ---
 
-# Technical Guide Design System
+# מערכת עיצוב לארטיפקטים של הסבר
 
-מערכת עיצוב מקיפה ליצירת מדריכים טכניים ותיעוד עם אסתטיקה מודרנית כהה.
+## למה הסקיל הזה קיים
 
-## Color Palette
+ארטיפקט הסבר הוא מסמך שנפתח פעם אחת, נקרא ברצף, ולפעמים נשמר או נשלח הלאה. הוא לא אפליקציה ולא דף שיווקי, ולכן כל מה שנועד למשוך תשומת לב — גרדיאנטים, זוהר, כותרת ענק, אמוג'י בכל כותרת — עובד נגדו. הקורא כבר החליט לקרוא; התפקיד של העיצוב הוא רק לא להפריע לו, ולעזור לו למצוא את החלק שהוא מחפש כשהוא חוזר למסמך שבוע אחר כך.
 
-### Primary Colors
-- **Primary**: `#0088cc` - כותרות H2, קישורים, כפתורים ראשיים
-- **Secondary**: `#2ecc71` - כותרות H3, הודעות הצלחה
-- **Warning**: `#f39c12` - כותרות H4, אזהרות
-- **Danger**: `#e74c3c` - שגיאות קריטיות, התראות חמורות
-- **Purple**: `#9b59b6` - אנומליות, סטטוס מיוחד
+הגרסה הקודמת של הסקיל הזה עיצבה מסמכים כמו דפי נחיתה: באנר בגובה 60 פיקסלים עם גרדיאנט כחול, `box-shadow` זוהר סביב כל סקשן, רוחב של 1200 פיקסלים, ואמוג'י מובנה בכל `h2`. זה נראה מרשים בצילום מסך ומעייף בקריאה אמיתית, ובנייד — שזה מסך הקריאה בפועל — הרוחב הרחב והפדינג הגדול פשוט מבזבזים את המקום. הגרסה הזו מחליפה את זה בעיצוב שטוח ושקט: רקע כהה אחיד, גבולות דקים במקום צללים, צבע הדגשה אחד, ורוחב עמודה שנועד לשורת טקסט נוחה ולא למסך רחב.
 
-### Background Colors
-- **Page Background**: `linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%)`
-- **Card/Section Background**: `#16213e`
-- **Code Background**: `#0f0f23` (כהה יותר)
-- **Border Color**: `#3d5a80`
+השינוי השני הוא בהיקף. השם `tech-guide-design` נשאר מטעמי תאימות, אבל התחום הוא כל ארטיפקט הסבר: סיכום שבועי, ניתוח החלטה, השוואה בין שתי גישות, מסמך אפיון, דוח סריקה. הימצאות קוד במסמך היא מקרה פרטי, לא תנאי כניסה.
 
-### Text Colors
-- **Primary Text**: `#eee` (לבן-שבור)
-- **Secondary Text**: opacity 0.8-0.9
-- **Code Text**: `#7fdbca` (inline code)
-- **Code Block Text**: `#c3cee3`
+## מתי בכלל בונים ארטיפקט הסבר
 
-### Syntax Highlighting
+זה היה חסר עד היום, וזו הסיבה שהסקיל לא נטען כשהיה צריך. הכלל הפשוט: **בקשה מפורשת תמיד גוברת** — אם המשתמש ביקש מסמך, מדריך, דף או ארטיפקט, בונים, בלי לשקול מחדש. מעבר לזה, בנה ארטיפקט מיוזמתך כשמתקיימים לפחות שניים מהתנאים הבאים.
+
+התשובה ארוכה משלוש-ארבע פסקאות ויש לה מבנה פנימי — כמה נושאים נפרדים שהקורא ירצה לדלג ביניהם, ולא רצף אחד. תוכן צ'אט ארוך נקרא כמפולת; אותו תוכן בכרטיסים ממוספרים נקרא כמסמך.
+
+התוכן נועד לחיות אחרי השיחה. אם הוא ייקרא שוב, יישלח למישהו, או ישמש כהתייחסות בעוד חודש — הוא צריך צורה עצמאית. אם הוא נצרך פעם אחת ונשכח, צ'אט זה בדיוק הכלי הנכון.
+
+יש בו טבלאות, השוואות, בלוקי קוד או פריטים חוזרים במבנה זהה. אלה בדיוק הדברים שמתפרקים בפורמט צ'אט ומתיישרים בעיצוב.
+
+**אל תבנה ארטיפקט** כשהתשובה היא עובדה, החלטה או פסקה — ארטיפקט לשורה אחת הוא טקס מיותר שדורש הקשה נוספת כדי לקרוא. אל תבנה גם כשהתוכן עדיין בדיון ועומד להשתנות בהודעה הבאה; ארטיפקט מקבע ומייקר כל תיקון. ואל תבנה כשהמשתמש שיתף משהו רגשי או שאל שאלה קצרה — שם מסמך מעוצב הוא בדיוק התגובה הלא נכונה.
+
+הערה על יעד השמירה: הסקיל הזה מייצר HTML לקריאה. אם הפלט אמור להישמר כמסמך מקור לעריכה מאוחרת, המקום שלו הוא Markdown-docs או CodeKeeper לפי הכללים הקבועים, ואז כותבים Markdown ולא HTML.
+
+## שבעת העקרונות שקובעים איך זה נראה
+
+**רקע שטוח, בלי גרדיאנטים.** הרקע הוא `#0d1117` אחיד, וכל שכבה מעליו נבדלת בגוון בלבד: פאנל `#161b22`, פאנל פנימי `#1c2430`. גרדיאנט ברקע של מסמך ארוך יוצר תחושת "עמוד נחיתה" ומקשה על העין לזהות איפה נגמר בלוק ומתחיל הבא.
+
+**גבולות במקום צללים.** ההפרדה בין רכיבים נעשית עם `1px solid #2a323d`. אין `box-shadow` בשום מקום. צל בעיצוב כהה כמעט לא נראה ורק מוסיף עכירות סביב הקצוות.
+
+**צבע הדגשה אחד.** `#7aa2f7` הוא הצבע היחיד שנושא משמעות: קישורים, ערכי מפתח, פס ההדגשה בקאלאאוט. ירוק `#a6e3a1` וכתום `#f0b37e` שמורים לתגיות סטטוס בלבד — "חדש" מול "עדכון". ברגע שיש ארבעה צבעים פעילים, אף אחד מהם כבר לא מסמן כלום.
+
+**היררכיה בגודל, לא בקישוט.** `h1` הוא `1.55rem` ו-`h2` הוא `1.12rem` — פער קטן בכוונה. הכותרות מסומנות בעמדה שלהן במבנה (כותרת של כרטיס), לא בגודל דרמטי, לא בקו תחתון עבה ולא באמוג'י צמוד.
+
+**רוחב עמודה 820 פיקסלים.** זה הרוחב שנותן שורה נוחה לקריאה. 1200 פיקסלים מייצרים שורות ארוכות שהעין מאבדת בהן את תחילת השורה הבאה — בעברית זה מורגש אפילו יותר.
+
+**מובייל הוא ברירת המחדל, לא breakpoint.** הפדינג `22px 16px 60px`, גופן `16px`, ו-`line-height: 1.75` נכונים כבר במסך צר. אין `@media` שמתקן דברים אחר כך, כי אין מה לתקן. אם רכיב דורש media query כדי להיות קריא בנייד — הרכיב שגוי.
+
+**אמוג'י בכותרות, לא.** מספור (`1.`, `2.`) עושה את אותה עבודה של סימון והפרדה, ונשאר קריא כשמעתיקים את הטקסט לכל מקום אחר.
+
+## טוקנים ובסיס
+
 ```css
-.comment { color: #6a9955; }     /* ירוק זית */
-.keyword { color: #c586c0; }     /* סגול */
-.string { color: #ce9178; }      /* כתום */
-.function { color: #dcdcaa; }    /* צהוב */
-.variable { color: #9cdcfe; }    /* כחול בהיר */
-.number { color: #b5cea8; }      /* ירוק בהיר */
-.operator { color: #d4d4d4; }    /* אפור בהיר */
+:root{
+  --bg:#0d1117; --panel:#161b22; --panel2:#1c2430; --line:#2a323d;
+  --tx:#e6edf3; --muted:#9aa7b4; --accent:#7aa2f7; --accent2:#a6e3a1; --warn:#f0b37e;
+  --danger:#f7768e;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans Hebrew","Heebo",Arial,sans-serif;
+  line-height:1.75;font-size:16px;-webkit-text-size-adjust:100%}
+.wrap{max-width:820px;margin:0 auto;padding:22px 16px 60px}
 ```
 
-## CSS Variables Template
+`--danger` הוא תוספת ולא מופיע בקובץ המקור. השתמש בו רק לשגיאה או לאזהרה אמיתית, ולא כצבע רביעי לגיוון.
 
-Always start with CSS variables in `:root`:
+## הרכיבים
+
+### כותרת עליונה, פילים ופסקת פתיחה
+
+הכותרת מופרדת בקו תחתון דק בלבד. מתחתיה שורת "פילים" — כמוסות קטנות עם מטא-דאטה של המסמך (תאריך, טווח, כמות פריטים), שבהן הערך בצבע ההדגשה והתווית בצבע מושתק. אחריהן פסקת lede קצרה בצבע מושתק שאומרת מה יש במסמך ומה השורה התחתונה שלו. הצירוף הזה נותן לקורא את כל ההקשר בלי לגלול.
 
 ```css
-:root {
-    --primary-color: #0088cc;
-    --secondary-color: #2ecc71;
-    --warning-color: #f39c12;
-    --danger-color: #e74c3c;
-    --dark-bg: #1a1a2e;
-    --card-bg: #16213e;
-    --text-color: #eee;
-    --code-bg: #0f0f23;
-    --border-color: #3d5a80;
-}
+header{border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:26px}
+h1{font-size:1.55rem;margin:0 0 10px;letter-spacing:-.01em}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.pill{background:var(--panel);border:1px solid var(--line);border-radius:999px;
+  padding:5px 13px;font-size:.83rem;color:var(--muted)}
+.pill b{color:var(--accent);font-weight:600}
+.lede{color:var(--muted);font-size:.95rem;margin:14px 0 0}
 ```
 
-## Layout Structure
+### כרטיס — יחידת התוכן הבסיסית
 
-### General Layout
-- **Direction**: `dir="rtl"` (עברית)
-- **Container Width**: `max-width: 1200px` ממורכז
-- **Font Family**: 'Segoe UI', Tahoma, Arial, sans-serif
-- **Line Height**: `1.8` (קריאות מיטבית)
-- **Spacing**: `40px` בין sections, `20px` בין אלמנטים
+כל נושא יושב בכרטיס משלו. זו היחידה שמחליפה את ה-`section` הכבד של הגרסה הקודמת: פאנל, גבול דק, פינות `14px`, ורווח `16px` בלבד בין כרטיסים. הרווח הקטן מכוון — הכרטיסים אמורים להיקרא כרשימה רציפה, לא כעמודים נפרדים.
 
-### Body Styling
 ```css
-body {
-    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
-    background: linear-gradient(135deg, var(--dark-bg) 0%, #0f0f23 100%);
-    color: var(--text-color);
-    line-height: 1.8;
-    min-height: 100vh;
-}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+  padding:20px 18px;margin-bottom:16px}
+.card h2{font-size:1.12rem;margin:0 0 4px;color:var(--tx)}
+.card p{margin:0 0 12px}
 ```
 
-## Header Component
+### תגיות
 
-### Styling
-- **Padding**: `60px 20px`
-- **Background**: `linear-gradient(135deg, #0088cc 0%, #005577 100%)`
-- **Border Radius**: `0 0 30px 30px` (פינות עגולות רק בתחתית)
-- **Box Shadow**: `0 10px 40px rgba(0, 136, 204, 0.3)`
+שורת תגיות מתחת לכותרת הכרטיס, לסיווג מהיר: סוג, רישיון, תאריך, סטטוס. הווריאנטים הצבעוניים משנים רק את צבע הטקסט והגבול, לא את הרקע — תגית עם רקע מלא צועקת חזק מדי בתוך פסקה.
 
-### Typography
-- **H1**: `2.8em` עם `text-shadow: 2px 2px 4px rgba(0,0,0,0.3)`
-- **Subtitle**: `1.3em` עם `opacity: 0.9`
-
-### Example
 ```css
-header {
-    text-align: center;
-    padding: 60px 20px;
-    background: linear-gradient(135deg, var(--primary-color) 0%, #005577 100%);
-    margin-bottom: 40px;
-    border-radius: 0 0 30px 30px;
-    box-shadow: 0 10px 40px rgba(0, 136, 204, 0.3);
-}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px}
+.tag{font-size:.74rem;background:var(--panel2);border:1px solid var(--line);
+  border-radius:6px;padding:3px 9px;color:var(--muted)}
+.tag.new{color:var(--accent2);border-color:#2d4a35}
+.tag.upd{color:var(--warn);border-color:#4a3a2a}
 ```
 
-## Section/Card Components
+### קאלאאוט — הרכיב הכי חשוב במערכת
 
-### Standard Section
-- **Background**: `#16213e`
-- **Border**: `1px solid #3d5a80`
-- **Border Radius**: `15px`
-- **Padding**: `35px`
-- **Margin Bottom**: `30px`
-- **Box Shadow**: `0 5px 25px rgba(0,0,0,0.3)`
+זה מה שהחליף את ארבעת סוגי ה-alert הצבעוניים. במקום ארבעה סוגים לפי חומרה, יש רכיב אחד לפי תפקיד: הפסקה שמחברת את התוכן הכללי למקרה הספציפי של הקורא. פס ההדגשה משתמש ב-`border-inline-start`, שמתהפך נכון לבד ב-RTL — `border-right` היה נשבר במסמך אנגלי.
 
-### Example
 ```css
-section {
-    background: var(--card-bg);
-    border-radius: 15px;
-    padding: 35px;
-    margin-bottom: 30px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 5px 25px rgba(0,0,0,0.3);
-}
+.why{background:var(--panel2);border-inline-start:3px solid var(--accent);
+  border-radius:0 8px 8px 0;padding:11px 14px;font-size:.93rem;color:#cdd7e1;margin:0 0 12px}
+.why b{color:var(--accent);font-weight:600}
 ```
 
-## Typography Hierarchy
+הכותרת המודגשת בתחילתו היא מה שנותן לו את התפקיד. נסח אותה כשאלה שהקורא באמת שואל — "איך זה משתלב אצלך", "מה לעשות עם זה", "למה זה חשוב כאן" — ולא כתווית גנרית כמו "הערה" או "טיפ".
 
-### H2 (Main Headings)
+### קוד
+
+בלוקי קוד תמיד `direction:ltr` ו-`text-align:left`, אחרת סימני פיסוק וסוגריים קופצים לצד הלא נכון. הקוד ה-inline דורש טיפול נוסף שקל לפספס: `unicode-bidi:embed` יחד עם `display:inline-block` הם מה שמונע מנתיב או שם פונקציה באנגלית להתפרק באמצע משפט עברי.
+
 ```css
-h2 {
-    color: var(--primary-color);
-    font-size: 1.8em;
-    margin-bottom: 25px;
-    padding-bottom: 15px;
-    border-bottom: 3px solid var(--primary-color);
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
+code{background:#0b0f14;border:1px solid var(--line);border-radius:6px;
+  padding:2px 7px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:.85rem;color:var(--accent2);direction:ltr;display:inline-block;
+  unicode-bidi:embed;max-width:100%;overflow-x:auto;vertical-align:middle}
+pre{background:#0b0f14;border:1px solid var(--line);border-radius:8px;padding:12px 14px;
+  overflow-x:auto;direction:ltr;text-align:left;margin:0 0 12px}
+pre code{border:0;padding:0;background:none;display:block;white-space:pre}
 ```
-- Icon size: `1.2em`
-- Border bottom: `3px solid`
 
-### H3 (Secondary Headings)
+אל תוסיף צביעת תחביר ידנית עם `span` צבעוניים. בגרסה הקודמת זו הייתה המלצה, והיא מכפילה את נפח ה-HTML, שוברת העתקה של הקוד, ומוסיפה חמישה צבעים למסמך שהעיקרון שלו הוא צבע אחד.
+
+### קישורים ושורת מקורות
+
+קישור מסומן בקו תחתון דק בגוון עמום שמתבהר ב-hover, ולא בקו תחתון סטנדרטי. שורת המקורות בתחתית כרטיס היא טקסט קטן ומושתק עם `word-break:break-all`, שמונע מכתובת ארוכה לפרוץ את רוחב הכרטיס בנייד.
+
 ```css
-h3 {
-    color: var(--secondary-color);
-    font-size: 1.3em;
-    margin: 25px 0 15px 0;
-}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid #2f4670}
+a:hover{border-bottom-color:var(--accent)}
+.src{font-size:.85rem;color:var(--muted)}
+.src a{word-break:break-all}
 ```
 
-### H4 (Tertiary Headings)
+### תיבת הערה וכותרת תחתונה
+
+התיבה המקווקוות היא לתוכן מסדר שני: מה לא נכנס ולמה, סייגים, מגבלות אמינות. הגבול המקווקו אומר לקורא שזה לא חלק מהרצף הראשי בלי להוסיף עוד צבע.
+
 ```css
-h4 {
-    color: var(--warning-color);
-    margin: 20px 0 10px 0;
-}
+.note{background:var(--panel);border:1px dashed var(--line);border-radius:12px;
+  padding:16px 18px;color:var(--muted);font-size:.9rem;margin-top:26px}
+.note h3{color:var(--tx);font-size:1rem;margin:0 0 8px}
+footer{margin-top:30px;padding-top:16px;border-top:1px solid var(--line);
+  color:var(--muted);font-size:.82rem}
 ```
 
-## Code Components
+### טבלאות ורשימות
 
-### Inline Code
+הקובץ המקורי לא כלל טבלה, וזו הגזירה שלה לפלטה: בלי רקע צבעוני בשורת הכותרת, הפרדה בקווים בלבד, ועטיפה ב-`div` עם גלילה אופקית כי טבלה בעלת שלוש עמודות ומעלה תמיד תחרוג במסך צר.
+
 ```css
-code {
-    background: var(--code-bg);
-    padding: 3px 8px;
-    border-radius: 5px;
-    font-family: 'Consolas', 'Monaco', monospace;
-    font-size: 0.9em;
-    color: #7fdbca;
-}
+.table-wrap{overflow-x:auto;margin:0 0 12px}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{padding:9px 12px;text-align:start;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:.83rem;border-bottom:1px solid #3a4552}
+ul,ol{margin:0 0 12px;padding-inline-start:20px}
+li{margin-bottom:5px}
 ```
 
-### Code Blocks
-```css
-pre {
-    background: var(--code-bg);
-    padding: 20px;
-    border-radius: 10px;
-    overflow-x: auto;
-    margin: 20px 0;
-    border: 1px solid var(--border-color);
-    direction: ltr;
-    text-align: left;
-}
+## שלד המסמך
 
-pre code {
-    padding: 0;
-    background: none;
-    color: #c3cee3;
-    line-height: 1.6;
-}
-```
-
-**Important**: Code blocks always have `direction: ltr` and `text-align: left`.
-
-## Table Components
-
-### Structure
-```css
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    background: var(--code-bg);
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-th, td {
-    padding: 15px;
-    text-align: right;
-    border-bottom: 1px solid var(--border-color);
-}
-
-th {
-    background: var(--primary-color);
-    color: white;
-    font-weight: 600;
-}
-
-tr:hover {
-    background: rgba(0, 136, 204, 0.1);
-}
-```
-
-## Alert Boxes
-
-### Structure
-- **Layout**: Flexbox עם gap `15px`
-- **Padding**: `20px`
-- **Border Radius**: `10px`
-- **Border Right**: `4px solid` (צבע לפי סוג)
-- **Icon**: Emoji בגודל `1.5em` - `2em`
-
-### Alert Types
-
-#### Info Alert
-```css
-.alert-info {
-    background: rgba(0, 136, 204, 0.15);
-    border-right: 4px solid var(--primary-color);
-}
-/* Icon: 💡 or ℹ️ */
-```
-
-#### Success Alert
-```css
-.alert-success {
-    background: rgba(46, 204, 113, 0.15);
-    border-right: 4px solid var(--secondary-color);
-}
-/* Icon: ✅ */
-```
-
-#### Warning Alert
-```css
-.alert-warning {
-    background: rgba(243, 156, 18, 0.15);
-    border-right: 4px solid var(--warning-color);
-}
-/* Icon: ⚠️ */
-```
-
-#### Danger Alert
-```css
-.alert-danger {
-    background: rgba(231, 76, 60, 0.15);
-    border-right: 4px solid var(--danger-color);
-}
-/* Icon: ❌ */
-```
-
-### Example HTML
 ```html
-<div class="alert-box alert-info">
-    <span style="font-size: 1.5em;">💡</span>
-    <div>
-        <strong>טיפ:</strong> תוכן ההתראה כאן
-    </div>
-</div>
-```
-
-## Badge Components
-
-### Styling
-```css
-.badge {
-    display: inline-block;
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-size: 0.85em;
-    font-weight: bold;
-    color: white;
-    margin: 5px 5px 5px 0;
-}
-
-.badge-primary { background: #0088cc; }
-.badge-success { background: #2ecc71; }
-.badge-warning { background: #f39c12; }
-.badge-danger { background: #e74c3c; }
-.badge-purple { background: #9b59b6; }
-```
-
-**Key Features**:
-- צורת גלולה (pill shape)
-- צבע רקע מלא (לא שקוף)
-- טקסט לבן תמיד
-
-## Grid System
-
-### CSS Grid Layout
-```css
-.grid-2 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    margin: 20px 0;
-}
-```
-
-### Feature Cards (inside Grid)
-```css
-.feature-card {
-    background: var(--code-bg);
-    padding: 25px;
-    border-radius: 10px;
-    border: 1px solid var(--border-color);
-}
-```
-
-## Special Components
-
-### Architecture Diagrams
-```css
-.architecture-diagram {
-    background: var(--code-bg);
-    padding: 30px;
-    border-radius: 15px;
-    margin: 25px 0;
-    direction: ltr;
-    text-align: center;
-    font-family: monospace;
-    font-size: 0.95em;
-    line-height: 1.4;
-    overflow-x: auto;
-    white-space: pre;
-}
-```
-
-### File Tree
-```css
-.file-tree {
-    background: var(--code-bg);
-    padding: 20px;
-    border-radius: 10px;
-    font-family: monospace;
-    direction: ltr;
-    text-align: left;
-}
-
-.file-tree .folder { color: #f39c12; }
-.file-tree .file { color: #3498db; }
-```
-
-### Table of Contents
-```css
-.toc {
-    background: var(--code-bg);
-    padding: 25px;
-    border-radius: 10px;
-    margin-bottom: 30px;
-}
-
-.toc ul {
-    list-style: none;
-    margin: 0;
-}
-
-.toc li {
-    padding: 8px 0;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.toc a {
-    color: var(--primary-color);
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.toc a:hover {
-    color: var(--secondary-color);
-}
-```
-
-### API Endpoint Cards
-```css
-.endpoint-card {
-    background: var(--code-bg);
-    border-radius: 10px;
-    margin: 15px 0;
-    overflow: hidden;
-    border: 1px solid var(--border-color);
-}
-
-.endpoint-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 15px 20px;
-    background: rgba(0, 136, 204, 0.1);
-}
-
-.method {
-    padding: 5px 12px;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 0.85em;
-}
-
-.method-get { background: #2ecc71; color: white; }
-.method-post { background: #3498db; color: white; }
-
-.endpoint-path {
-    font-family: monospace;
-    color: var(--text-color);
-    direction: ltr;
-}
-```
-
-## Responsive Design
-
-### Mobile Breakpoint (max-width: 768px)
-```css
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 2em;
-    }
-
-    section {
-        padding: 20px;
-    }
-
-    .grid-2 {
-        grid-template-columns: 1fr;
-    }
-}
-```
-
-## Lists
-
-### Styling
-```css
-ul, ol {
-    margin: 15px 30px;
-    line-height: 1.8;
-}
-
-li {
-    margin: 8px 0;
-}
-```
-
-## Usage Instructions
-
-### Document Structure Template
-```html
-<!DOCTYPE html>
-<html dir="rtl" lang="he">
+<!doctype html>
+<html lang="he" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>מדריך טכני</title>
-    <style>
-        /* Include all CSS variables and styles */
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>...</title>
+<style>/* tokens + components */</style>
 </head>
 <body>
-    <header>
-        <h1>כותרת המדריך</h1>
-        <p>תיאור קצר</p>
-        <div>
-            <span class="badge badge-primary">טכנולוגיה 1</span>
-            <span class="badge badge-success">טכנולוגיה 2</span>
-        </div>
-    </header>
-
-    <div class="container">
-        <nav class="toc">
-            <h3>תוכן עניינים</h3>
-            <ul>
-                <li><a href="#section1">1. נושא ראשון</a></li>
-            </ul>
-        </nav>
-
-        <section id="section1">
-            <h2><span class="icon">📊</span> נושא ראשון</h2>
-            <!-- Content here -->
-        </section>
+<div class="wrap">
+  <header>
+    <h1>...</h1>
+    <div class="meta">
+      <span class="pill">label: <b>value</b></span>
     </div>
+    <p class="lede">...</p>
+  </header>
+
+  <div class="card">
+    <h2>1. ...</h2>
+    <div class="tags"><span class="tag new">...</span><span class="tag">...</span></div>
+    <p>...</p>
+    <div class="why"><b>...</b> ...</div>
+    <pre><code>...</code></pre>
+    <p class="src">...</p>
+  </div>
+
+  <div class="note">
+    <h3>...</h3>
+    <p>...</p>
+  </div>
+
+  <footer>...</footer>
+</div>
 </body>
 </html>
 ```
 
-### Key Principles
+שים לב ש-`dir="rtl"` יושב על `html` ולא על `body`, ושה-CSS כולו inline בתוך `style` יחיד — ארטיפקט חייב להיות קובץ אחד עצמאי.
 
-1. **Always use RTL**: `dir="rtl"` on `<html>` element
-2. **CSS Variables First**: Define all colors as CSS variables
-3. **Semantic HTML**: Use proper HTML5 semantic elements
-4. **Code Direction**: All code blocks should be `ltr`
-5. **Consistent Spacing**: Follow spacing guidelines strictly
-6. **Icon Integration**: Use emojis in H2 headings (optional but recommended)
-7. **Progressive Enhancement**: Mobile-first responsive design
+## אנטי-דפוסים
 
-### Common Patterns
+אלה הדברים שהופיעו בגרסה הקודמת של הסקיל ואינם חוזרים. כשאתה מוצא את עצמך כותב אחד מהם, זה סימן שגלשת חזרה לעיצוב של דף שיווקי.
 
-#### Pattern 1: Section with Alert
-```html
-<section id="overview">
-    <h2><span class="icon">📊</span> סקירה כללית</h2>
-    <p>תוכן הסקירה...</p>
+באנר כותרת עם גרדיאנט, פדינג של 60 פיקסלים ופינות עגולות בתחתית. `box-shadow` בכל צורה שהיא, ובמיוחד צל צבעוני זוהר. אמוג'י מובנה בכותרות `h2`. תגיות ותוויות עם רקע צבעוני מלא וטקסט לבן. `max-width` של 1200 פיקסלים. ארבעה סוגי alert צבעוניים לפי חומרה. צביעת תחביר ידנית ב-`span`. קו תחתון של שלושה פיקסלים מתחת לכותרות. `transition` ואנימציות — במסמך קריאה הן רק מסיחות.
 
-    <div class="alert-box alert-info">
-        <span style="font-size: 1.5em;">💡</span>
-        <div>
-            <strong>טיפ:</strong> מידע שימושי
-        </div>
-    </div>
-</section>
-```
+ודבר אחרון שאינו ויזואלי: אל תמלא רכיב רק כי הוא קיים במערכת. מסמך בלי מקורות לא צריך `.src`, ומסמך שאין בו סייגים לא צריך `.note` עם משפט ממולא בכוח.
 
-#### Pattern 2: Grid with Feature Cards
-```html
-<div class="grid-2">
-    <div class="feature-card">
-        <h4>תכונה 1</h4>
-        <p>תיאור התכונה</p>
-    </div>
-    <div class="feature-card">
-        <h4>תכונה 2</h4>
-        <p>תיאור התכונה</p>
-    </div>
-</div>
-```
+## מתי לא להשתמש בסקיל הזה
 
-#### Pattern 3: Code Block with Syntax Highlighting
-```html
-<pre><code><span class="comment"># Comment</span>
-<span class="keyword">def</span> <span class="function">example</span>():
-    <span class="variable">result</span> = <span class="string">"Hello"</span>
-    <span class="keyword">return</span> result</code></pre>
-```
-
-## Best Practices
-
-1. **Token Efficiency**: Keep inline styles minimal, use CSS classes
-2. **Readability**: Maintain high contrast and generous spacing
-3. **Consistency**: Use the same patterns throughout the document
-4. **Accessibility**: Ensure proper color contrast and semantic HTML
-5. **Performance**: Minimize inline styles, use CSS variables
-6. **Maintainability**: Clear class naming, logical structure
-
-## When NOT to Use This Skill
-
-- Simple text documents without code or technical content
-- Forms or interactive applications (use webapp skills instead)
-- Print-optimized documents (this is screen-optimized)
-- Light-themed documentation (this is dark-themed)
+בדף נחיתה, דף מכירה או כל עמוד שנועד לשכנע — שם המקום של `hebrew-landing-design`, וההנחיות כאן יעבדו נגדך. באפליקציה או בכלי אינטראקטיבי עם מצב ולוגיקה, שם הצורה נגזרת מהאינטראקציה ולא ממסמך. במסמך שמיועד להדפסה, כי כל המערכת הזו כהה. וכשמה שנדרש הוא סגנון הכתיבה ולא הצורה — הניסוח של ההסבר עצמו הוא `explanatory-writing`, והשניים אמורים לרוץ יחד: הוא כותב את המשפטים, זה מעצב את הדף.
