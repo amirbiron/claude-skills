@@ -1,11 +1,15 @@
 ---
 name: startup-hook-skill
-description: Creating and developing startup hooks for Claude Code on the web. Use when the user wants to set up a repository for Claude Code on the web, create a SessionStart hook to ensure their project can run tests and linters during web sessions.
+description: Creating and developing startup hooks for Claude Code cloud sessions. Use only when the user asks for a SessionStart hook committed to their repository. Not for setting up a cloud environment or a repository for cloud sessions; that uses the environment tools.
 ---
 
-# Startup Hook Skill for Claude Code on the web
+# Startup Hook Skill for Claude Code cloud sessions
 
-Create SessionStart hooks that install dependencies so tests and linters work in Claude Code on the web sessions.
+Create SessionStart hooks that install dependencies so tests and linters work in Claude Code cloud sessions.
+
+If the user asked to set up an environment rather than for a hook, stop here and commit nothing.
+Use `get_environment`, then `create_environment` or `update_environment` as it says, if you have them.
+Otherwise tell the user to set it up in the environment's settings.
 
 ## Hook Basics
 
@@ -38,7 +42,7 @@ The hook runs in background while the session starts. Using async mode reduces l
 Available environment variables:
 - `$CLAUDE_PROJECT_DIR` - Repository root path
 - `$CLAUDE_ENV_FILE` - Path to write environment variables
-- `$CLAUDE_CODE_REMOTE` - If running in a remote environment (i.e. Claude code on the web)
+- `$CLAUDE_CODE_REMOTE` - If running in a remote environment (i.e. a Claude Code cloud session)
 
 Use `$CLAUDE_ENV_FILE` to persist variables for the session:
 ```bash
@@ -76,6 +80,8 @@ Create a script that installs dependencies.
 - Write the hook only for the web unless user asks otherwise (see $CLAUDE_CODE_REMOTE)
 - The container state gets cached after the hook completes, prefer dependency install methods that take advantage of that (i.e. prefer npm install over npm ci)
 - Be idempotent (safe to run multiple times)
+- Skip an install that is already done. The hook runs at every session start, resume, clear and compact, and a synchronous hook holds the user's message until it ends. Run an install only if a file that decides what gets installed has changed since the install last succeeded (see the template below)
+- Store the hash file inside the directory that the install fills, and only if git ignores that directory (for example node_modules, or a .venv that pip installs into). The file then disappears with the packages, and `git add` leaves it out. Put an install that fills no such directory (for example pip into the system Python, global tools, apt packages) outside the check, so it runs every time
 - Non-interactive (no user input)
 
 ### 3. Create Hook File
@@ -87,7 +93,23 @@ cat > .claude/hooks/session-start.sh << 'EOF'
 set -euo pipefail
 
 echo '{"async": true, "asyncTimeout": 300000}'
-# Install dependencies here
+
+cd "${CLAUDE_PROJECT_DIR:-.}"
+
+# Run the install only if a listed file has changed since the install last succeeded
+hashes=node_modules/.session-start.sha256
+if ! sha256sum --check --status "$hashes" 2>/dev/null; then
+  # Delete the old hashes first, so a failed install runs again next time
+  rm -f "$hashes"
+
+  # Install dependencies here. A failed install must end the script (no "|| true")
+
+  # List this script and every file that decides what gets installed
+  # (in a workspace, each package's manifest too)
+  sha256sum .claude/hooks/session-start.sh package.json package-lock.json 2>/dev/null > "$hashes" || rm -f "$hashes"
+fi
+
+# Steps that every session needs, such as writing to $CLAUDE_ENV_FILE, go here
 EOF
 
 chmod +x .claude/hooks/session-start.sh
@@ -124,6 +146,8 @@ CLAUDE_CODE_REMOTE=true ./.claude/hooks/session-start.sh
 ```
 
 IMPORTANT: Verify dependencies are installed and script completes successfully.
+
+Run it a second time and verify that it skips the install. Then change the content of one of the hashed files, verify that it installs again, and restore the file.
 
 ### 6. Validate Linter
 
