@@ -8,7 +8,7 @@
 אבל הכתובת הזאת תתחיל לעבוד רק אחרי הדחיפה הראשונה ל‑main שמריצה את ה‑workflow.
 עד אז היא מחזירה 404. הריפו ציבורי, ולכן גם העמוד יהיה.
 
-יש גם [עותק ב‑Codekeeper](https://code-keeper-webapp.onrender.com/file/6a72d9edc9b55ce95e95ebe4),
+יש גם [עותק ב‑Codekeeper](https://codekeeper-webapp.onrender.com/file/6a72d9edc9b55ce95e95ebe4),
 אבל הוא צילום חד‑פעמי מ‑5 באוגוסט ולא מתעדכן.
 
 ---
